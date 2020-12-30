@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Header from './components/Header/Header';
+import Navbar from './components/Navbar/Navbar';
+//import Profile from './components/Profile/Profile';
+//import Messages from './components/Messages/Message'
+import {Route} from 'react-router-dom'
+import MessagesContainer from './components/Messages/MessageContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    return ( 
+            <div className = 'app-wrapper' >
+                <Header / >
+                <Navbar /* data={props.state} 
+                        dispatch={props.dispatch} */
+                        /* info={props.addInfo} 
+                        infoText={props.text} */ />
+                    <div>
+                        <Route path='/profile' render={()=> <ProfileContainer /* state={props.state} dispatch={props.dispatch} *//>
+                                                            /* <Profile message={props.state}
+                                                                    dispatch={props.dispatch}
+                                                                    profileText2={props.profileText1}/> */}/>
+
+                        <Route path='/message' render={()=> <MessagesContainer /* state={props.state} dispatch={props.dispatch} *//>
+                                                            /*<Messages info={props.state} 
+                                                                      message={props.state.profilePage} 
+                                                                    img={props.state.profilePage}  
+                                                                    dispatch={props.dispatch}/>*/}/>
+                    </div>
+            </div> 
+    )
 }
 
 export default App;

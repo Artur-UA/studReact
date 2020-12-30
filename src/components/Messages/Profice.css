@@ -1,0 +1,18 @@
+.dialogs{
+    display: grid;
+    grid-template-areas:
+    "n m";
+    grid-template-columns: 2fr 10fr;
+    padding: 20px;
+    background-color:gold ;
+    color:fuchsia;
+
+}
+
+.dialogsName{
+    grid-area: n;
+}
+
+.dialogsMessage{
+    grid-area: m;
+}
