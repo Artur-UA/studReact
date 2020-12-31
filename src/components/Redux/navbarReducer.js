@@ -18,18 +18,28 @@ const navbarReducer = (state = initialState, action) => {
             })
             state.texts=''
             return state; */
-            let newState = {...state};
+
+            /* let newState = {...state};
             newState.friends = [...state.friends];
             newState.friends.push({
                 id : newState.friends.length +1, name : newState.texts, img : 'https://i.movielib.ru/charpic/1580660/l/98a8/Kot_Matroskin.jpg'
             })
             newState.texts=''
-            return newState;
+            return newState; */
+
+            return {...state,
+                friends: [...state.friends, { id : state.friends.length +1, name : state.texts, img : 'https://i.movielib.ru/charpic/1580660/l/98a8/Kot_Matroskin.jpg' }],
+                texts: ''
+            };
         }
         case NEW_TEXT:{
-            let newState = {...state};
+            /* let newState = {...state};
             newState.texts = action.text;
-            return newState;
+            return newState; */
+
+            return{...state,
+                texts: action.text
+            }
         }
         default:
             return state;

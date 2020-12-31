@@ -24,21 +24,28 @@ const messageReducer = (state = initialState, action) => {
         case DIALOG_TEXT: {
             /* state.textTest = action.infoText; */
             
-            let newState = {...state} 
+            /* let newState = {...state} 
             newState.textTest = action.infoText;
 
-            return newState;
+            return newState; */
+            return {...state,
+                textTest: action.infoText
+            }
         }
         case DIALOG_TEXT_SEND: {
             /* state.dialogs.push({id : state.dialogs.length +1, message : state.textTest})
             state.textTest = ''; 
             return state; */
             
-            let newState = {...state};
+            /* let newState = {...state};
             newState.dialogs = [...state.dialogs];
             newState.dialogs.push({id : state.dialogs.length +1, message : state.textTest})
             newState.textTest = ''; 
-            return newState;
+            return newState; */
+            return {...state,
+                dialogs: [...state.dialogs, {id : state.dialogs.length +1, message : state.textTest}],
+                textTest: ''
+            };
         }
         default: 
             return state

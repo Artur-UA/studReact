@@ -15,6 +15,8 @@ const Messages = (props) => {
 
     const refArea = React.createRef();
 
+
+    console.log(props);
     const changedMessage = (e) => {
 /*         let valueMessage = refArea.current.value; */
         let valueMessage = e.target.value;

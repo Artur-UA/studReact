@@ -11,6 +11,8 @@ const Friends = (props) => {
 
     let newElement = React.createRef();
     
+    console.log(props);
+
     let addMessage = () => {
         /*let text = newElement.current.value;
          props.add(text)

@@ -18,12 +18,16 @@ const profileReducer = (state = initialState, action) => {
             state.message.push({id : state.message.length + 1, name:action.textInfo, like:69}) */
             
             
-            let newState = {...state};
+            /* let newState = {...state};
             newState.textBeforePost = action.textInfo;
             newState.message = [...state.message];
             newState.message.push({id : state.message.length + 1, name:action.textInfo, like:69})
 
-            return newState;
+            return newState; */
+            return {...state,
+                textBeforePost: action.textInfo,
+                message: [...state.message, {id : state.message.length + 1, name:action.textInfo, like:69}]
+            }
         }
         default:
             return state;
