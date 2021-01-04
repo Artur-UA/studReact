@@ -1,20 +1,28 @@
 export const Friend = "Friend";
-export const NotFriend = 'NotFriend';
+export const AddFriend = 'AddFriend';
 
 const initialState = {
     dataFriend: [
-        {id: 1, fullName: 'Remi Iren', location: {city: 'Kyiv', country: 'Ukraine'}, friend: true},
-        {id: 2, fullName: 'Sofia Loren', location: {city: 'Dnipro', country: 'Ukraine'}, friend: false},
-        {id: 3, fullName: 'Viktor Popov', location: {city: 'Kharkiv', country: 'Ukraine'}, friend: true}
+        {id: 1, friend: true, fullName: 'Remi Iren', location: {city: 'Kyiv', country: 'Ukraine'}},
+        {id: 2, friend: false, fullName: 'Sofia Loren', location: {city: 'Dnipro', country: 'Ukraine'}},
+        {id: 3, friend: true, fullName: 'Viktor Popov', location: {city: 'Kharkiv', country: 'Ukraine'}}
     ]
 }
 
 const friendsReducer = (state = initialState, action) => {
-    switch(action) {
+    switch(action.type) {
         case Friend:
-            return console.log('friend');
-        case NotFriend:
-            return console.log("notFriend");
+            return {
+                ...state,
+                dataFriend: state.dataFriend.map( d => {
+                    if (d.id === action.id){
+                        return {...d, friend: !d.friend }
+                    }
+                    return d;
+                })
+            }
+        case AddFriend:
+            return {...state, dataFriend: [state.dataFriend, ...action.data] }
         default:
             return state;
     }
@@ -22,5 +30,5 @@ const friendsReducer = (state = initialState, action) => {
 
 export default friendsReducer;
 
-export const startFriendship = () => ({ type: Friend })
-export const endFriendship = () => ({ type: NotFriend })
+export const friendshipAC = (id) => ({ type: Friend, id })
+export const addFriendAC = (data) => ({ type: AddFriend, data })
