@@ -1,17 +1,22 @@
 //import React from 'react'
 import {connect} from 'react-redux'
 import Friends from './Friends'
+import {friendshipAC, addFriendAC} from '../Redux/friendsReducer'
 
 let mapStateToProps = (state) => {
     return {
-        id: state.dataFriend.id,
-        data: 
+        info: state.friendsPage.dataFriend
     }
 }
 
 let mapDispatchToProps = (dispatch) => {
     return {
-
+        friendshipAC: (id) => {
+            dispatch(friendshipAC(id))
+        },
+        addFriendAC: (data) => {
+            dispatch(addFriendAC(data))
+        }
     }
 }
 

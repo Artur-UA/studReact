@@ -2,11 +2,11 @@ export const Friend = "Friend";
 export const AddFriend = 'AddFriend';
 
 const initialState = {
-    dataFriend: [
+    dataFriend: [/* 
         {id: 1, friend: true, fullName: 'Remi Iren', location: {city: 'Kyiv', country: 'Ukraine'}},
         {id: 2, friend: false, fullName: 'Sofia Loren', location: {city: 'Dnipro', country: 'Ukraine'}},
         {id: 3, friend: true, fullName: 'Viktor Popov', location: {city: 'Kharkiv', country: 'Ukraine'}}
-    ]
+     */]
 }
 
 const friendsReducer = (state = initialState, action) => {
@@ -22,7 +22,7 @@ const friendsReducer = (state = initialState, action) => {
                 })
             }
         case AddFriend:
-            return {...state, dataFriend: [state.dataFriend, ...action.data] }
+            return {...state, dataFriend: [...state.dataFriend, ...action.data] }
         default:
             return state;
     }
