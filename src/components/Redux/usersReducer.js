@@ -9,14 +9,14 @@ const initialState = {
      */]
 }
 
-const friendsReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
     switch(action.type) {
         case Friend:
             return {
                 ...state,
                 dataFriend: state.dataFriend.map( d => {
                     if (d.id === action.id){
-                        return {...d, friend: !d.friend }
+                        return {...d, followed: !d.followed }
                     }
                     return d;
                 })
@@ -28,7 +28,7 @@ const friendsReducer = (state = initialState, action) => {
     }
 }
 
-export default friendsReducer;
+export default usersReducer;
 
 export const friendshipAC = (id) => ({ type: Friend, id })
 export const addFriendAC = (data) => ({ type: AddFriend, data })

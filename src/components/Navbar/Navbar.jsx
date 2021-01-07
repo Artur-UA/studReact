@@ -22,8 +22,12 @@ const Navbar = (props) => {
             <NavLink to ='/music'>Music</NavLink>
         </div>
         <div>
+            <NavLink to ='/users'>Users</NavLink>
+        </div>
+        <div>
             <NavLink to ='/setting'>Settings</NavLink>
         </div>
+
         <div className='friends'>
             <strong>Friends</strong>
             <FriendsContainer /* data={props.data} dispatch={props.dispatch} *//* add={props.info} newText={props.infoText}  textArea={props.data.texts}*//>

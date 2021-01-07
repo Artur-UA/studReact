@@ -7,7 +7,7 @@ import Navbar from './components/Navbar/Navbar';
 import {Route} from 'react-router-dom'
 import MessagesContainer from './components/Messages/MessageContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
-import FriendsContainer from './components/Friends/FriendsContainer';
+import UsersContainer from './components/Friends/UsersContainer';
 
 const App = () => {
     return ( 
@@ -28,7 +28,7 @@ const App = () => {
                                                                       message={props.state.profilePage} 
                                                                     img={props.state.profilePage}  
                                                                     dispatch={props.dispatch}/>*/}/>
-                       <Route path='/friends' render={() => <FriendsContainer/>}/>
+                       <Route path='/users' render={() => <UsersContainer/>}/>
                     </div>
             </div> 
     )

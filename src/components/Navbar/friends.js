@@ -6,8 +6,8 @@ const Friends = (props) => {
     let img = props.fr.friends;
      let work = props.newText; */
 
-    let newName = props.data.map(names => <div>{names.name}</div>)
-    let newImg = props.data.map(imgs => <img className='avatar' src={imgs.img} alt="альтернативный текст"/>)
+    let newName = props.data.map(names => <div key={names.id}>{names.name}</div>)
+    let newImg = props.data.map(imgs => <img key={imgs.id}className='avatar' src={imgs.img} alt="альтернативный текст"/>)
 
     let newElement = React.createRef();
     
