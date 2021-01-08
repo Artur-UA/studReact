@@ -5,7 +5,10 @@ import {friendshipAC, addFriendAC} from '../Redux/usersReducer'
 
 let mapStateToProps = (state) => {
     return {
-        info: state.usersPage.dataFriend
+        info: state.usersPage.dataFriend,
+        totalUsers: state.usersPage.totalUsers,
+        usersInPage: state.usersPage.usersInPage,
+        numberPage: state.usersPage.numberPage
     }
 }
 

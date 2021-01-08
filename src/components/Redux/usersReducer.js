@@ -6,7 +6,10 @@ const initialState = {
         {id: 1, friend: true, fullName: 'Remi Iren', location: {city: 'Kyiv', country: 'Ukraine'}},
         {id: 2, friend: false, fullName: 'Sofia Loren', location: {city: 'Dnipro', country: 'Ukraine'}},
         {id: 3, friend: true, fullName: 'Viktor Popov', location: {city: 'Kharkiv', country: 'Ukraine'}}
-     */]
+     */],
+     totalUsers: 1000,
+     usersInPage: 100,
+     numberPage: 3
 }
 
 const usersReducer = (state = initialState, action) => {
