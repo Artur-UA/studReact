@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import * as axios from 'axios'
-import './Users.css';
+//import './Users.css';
+import UsersCom from './UsersCom'
 
 
 class Users extends Component {
@@ -13,39 +14,46 @@ class Users extends Component {
         })
     } */
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users?page=55&count=3')
-        .then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.numberPage}&count=${this.props.usersInPage}`)
+            .then(response => {
             console.log(response)
             this.props.addFriendAC(response.data.items)
+            this.props.allPageAC(response.data.totalCount)
         })
     };
 
+    newPage = (pop) => {
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pop}&count=${this.props.usersInPage}`)
+            .then(response => {
+                this.props.newListAC(response, pop);
+            })
+    }
+
     render() {
 
-        let pagesCount = Math.ceil( this.props.totalUsers / this.props.usersInPage);
+        /* let pagesCount = Math.ceil( this.props.totalUsers / this.props.usersInPage);
 
         let pages = [];
 
         for( let i = 1; i <= pagesCount; i++) {
-            pages.push(' ' + i + ' ') 
-            }
+            pages.push(i) 
+            } */
 
-            console.log(this);
-            console.log(this.props.numberPage);
+         return <UsersCom totalUsers={ this.props.totalUsers} usersInPage={this.props.usersInPage} numberPage={this.props.numberPage} newPage={this.newPage} info={this.props.info} friendshipAC={this.props.friendshipAC}/>
 
-        return (
-            <div>
+            /* <div>
                 
                 {pages.map(pop => {
                     return  <span className={this.props.numberPage === pop ? 'activePage': undefined}
-                        onClick={newList}
+                        onClick={ (e) => {this.newPage(pop)}}
                     >{pop}</span>
                     
                 })}
 
-                <button className='activePage' onClick={this.newFriend}>Friendau</button>
-                
-            { this.props.info.map( i => <div key={i.id}>
+
+            { this.props.info.map( i => <div key={i.id} >
+                    
                     <div>{i.name}</div><span>{i.followed}</span>
                     <div><strong>i.location.city</strong>i.location.country</div> 
                     <img src={i.photos.small || "https://ihde.tsu.ru/wp-content/uploads/2017/10/no-ava-300x300.png"} alt="Ель-Шевченко"/>
@@ -60,8 +68,7 @@ class Users extends Component {
                 </div>
                 )
             }
-            </div>
-        )
+            </div> */
     }
 }
 

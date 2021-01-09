@@ -1,5 +1,8 @@
 export const Friend = "Friend";
 export const AddFriend = 'AddFriend';
+export const NewList = 'NewList';
+export const AllPage = 'AllPage';
+
 
 const initialState = {
     dataFriend: [/* 
@@ -9,7 +12,7 @@ const initialState = {
      */],
      totalUsers: 1000,
      usersInPage: 100,
-     numberPage: 3
+     numberPage: 5
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -26,6 +29,10 @@ const usersReducer = (state = initialState, action) => {
             }
         case AddFriend:
             return {...state, dataFriend: [...state.dataFriend, ...action.data] }
+        case NewList:
+            return {...state, dataFriend: action.response.data.items, numberPage: action.pop }
+        case AllPage:
+            return {...state, totalUsers: action.page }
         default:
             return state;
     }
@@ -35,3 +42,5 @@ export default usersReducer;
 
 export const friendshipAC = (id) => ({ type: Friend, id })
 export const addFriendAC = (data) => ({ type: AddFriend, data })
+export const newListAC = (response, pop) => ({ type: NewList, response, pop })
+export const allPageAC = (page) => ({ type: AllPage, page })
