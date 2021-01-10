@@ -1,8 +1,10 @@
-//import React from 'react';
+import React, {Component} from 'react';
 //import MyContext from '../Redux/context';
 import {profileTextActionCreator} from '../Redux/profileReducer'
 import Profile from './Profile';
 import {connect} from 'react-redux'
+import axios from 'axios';
+import {setNewProfileAC} from '../Redux/profileReducer'
 
 /* const ProfileContainer = () => {
     /* const messages = state.state.profilePage.message;
@@ -29,11 +31,30 @@ import {connect} from 'react-redux'
 }
 export default ProfileContainer; */
 
+class ProfileSetContainer extends Component {
+
+    componentDidMount(){
+        axios.get('https://social-network.samuraijs.com/api/1.0/profile/2')
+        .then(response => {
+            console.log(response)
+            this.props.setNewProfile(response.data)
+
+        })
+    }
+
+    render(){
+        return(
+            <Profile {...this.props}/>
+        )
+    }
+    
+}
 
 let mapStateToProps = (state) => {
         return{
             messagesValue: state.profilePage.textBeforePost,
-            messages: state.profilePage.message
+            messages: state.profilePage.message,
+            profileData: state.profilePage.profileData
         }
     }
 
@@ -42,11 +63,14 @@ let mapDispatchToProps = (dispatch) => {
             profileTextActionCreator : (text) => {
                 let action = profileTextActionCreator(text)
                 dispatch(action)
+            },
+            setNewProfile: (profileData) => {
+                dispatch(setNewProfileAC(profileData))
             } 
         }
 }
 
 
-const ProfileContainer = connect(mapStateToProps, mapDispatchToProps) (Profile);
+const ProfileContainer = connect(mapStateToProps, mapDispatchToProps) (ProfileSetContainer);
 
 export default ProfileContainer;

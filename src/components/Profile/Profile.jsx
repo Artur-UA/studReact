@@ -1,15 +1,14 @@
 import React from 'react';
 import Post from './Post/Post'
+import Preloader from '../../preloader/preloader'
 //import Dialogs from '../Message/Dialogs/Dialogs'
 //import {profileTextActionCreator} from '../Redux/profileReducer'
 
 const Profile = (state) => {
     /* const messages = state.message.profilePage.message; */
-
     const mess = state.messages.map(message => <Post name={message.name} like={message.like} />)
 
     let newElement = React.createRef();
-    
     
     let textSend = () => {
         let text = newElement.current.value
@@ -19,6 +18,9 @@ const Profile = (state) => {
         state.profileTextActionCreator(text) 
     }
 
+        if(!state.profileData) {
+            return <Preloader/>
+        }
     return (
         <div className='content'>
             <div>
@@ -28,6 +30,19 @@ const Profile = (state) => {
             <div className="post">
                 
                 <div>
+                    <div>
+                        {console.log(state)}
+                        <Preloader/>
+                        <img src={state.profileData.photos.small} alt='текст'/>
+                        {
+                            !state.profileData
+                                ? "эхеддлэ"
+                                
+                                : state.profileData.fullName/* <img src={state.profileData.photos.small} alt='текст'/>  */
+                        }
+                        
+                        
+                        img+status</div>
                     <textarea ref={newElement} 
                             /* value={state.message.profilePage.textBeforePost} */
                             value={state.messagesValue}

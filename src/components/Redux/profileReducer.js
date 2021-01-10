@@ -1,4 +1,6 @@
 export const PROFILE_TEXT = 'PROFILE_TEXT';
+export const SET_NEW_PROFILE = 'SET_NEW_PROFILE';
+
 
 const initialState = {
     message:[
@@ -7,7 +9,8 @@ const initialState = {
     {id:3, name:'Че', like:0},
     {id:4, name:'Хало', like:9}
     ],
-    textBeforePost: 'g'
+    textBeforePost: 'g',
+    profileData: []
 }
 
 
@@ -29,6 +32,9 @@ const profileReducer = (state = initialState, action) => {
                 message: [...state.message, {id : state.message.length + 1, name:action.textInfo, like:69}]
             }
         }
+        case SET_NEW_PROFILE: {
+            return {...state, profileData: action.profileData}
+        }
         default:
             return state;
     }
@@ -37,3 +43,4 @@ const profileReducer = (state = initialState, action) => {
 export default profileReducer;
 
 export const profileTextActionCreator = (text) => ({type:PROFILE_TEXT, textInfo:text})
+export const setNewProfileAC = (profileData) => ({type: SET_NEW_PROFILE, profileData})
