@@ -1,6 +1,7 @@
 import React from 'react';
 import './Users.css';
 import Preloader from '../../preloader/preloader'
+import { NavLink } from 'react-router-dom';
 
 
 const UsersCom = (props) => {
@@ -26,8 +27,11 @@ const UsersCom = (props) => {
                 { props.info.map( i => <div key={i.id} >
                         
                         <div>{i.name}</div><span>{i.followed}</span>
-                        <div><strong>i.location.city</strong>i.location.country</div> 
-                        <img src={i.photos.small || "https://ihde.tsu.ru/wp-content/uploads/2017/10/no-ava-300x300.png"} alt="Ель-Шевченко"/>
+                        <div>{i.id}</div>
+                        {/* <div><strong>i.location.city</strong>i.location.country</div>  */}
+                            <NavLink to={`/profile/${i.id}`}>
+                                <img src={i.photos.small || "https://ihde.tsu.ru/wp-content/uploads/2017/10/no-ava-300x300.png"} alt="Ель-Шевченко"/>
+                            </NavLink>
                         <div>
                             
                                 {i.followed

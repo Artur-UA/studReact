@@ -5,6 +5,7 @@ import Profile from './Profile';
 import {connect} from 'react-redux'
 import axios from 'axios';
 import {setNewProfileAC} from '../Redux/profileReducer'
+import {withRouter} from 'react-router-dom'
 
 /* const ProfileContainer = () => {
     /* const messages = state.state.profilePage.message;
@@ -34,12 +35,22 @@ export default ProfileContainer; */
 class ProfileSetContainer extends Component {
 
     componentDidMount(){
-        axios.get('https://social-network.samuraijs.com/api/1.0/profile/2')
+        let nameId = this.props.match.params.name_id;
+
+        if(!nameId) {
+            nameId = 1055
+        }
+
+        axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + nameId)
         .then(response => {
             console.log(response)
-            this.props.setNewProfile(response.data)
+            this.props.setNewProfileAC(response.data)
 
         })
+    }
+
+    goHome = () => {
+        this.props.history.push('/pip')
     }
 
     render(){
@@ -58,19 +69,20 @@ let mapStateToProps = (state) => {
         }
     }
 
-let mapDispatchToProps = (dispatch) => {
+/* let mapDispatchToProps = (dispatch) => {
         return{
             profileTextActionCreator : (text) => {
                 let action = profileTextActionCreator(text)
                 dispatch(action)
             },
-            setNewProfile: (profileData) => {
+            setNewProfileAC: (profileData) => {
                 dispatch(setNewProfileAC(profileData))
             } 
         }
-}
+} */
 
+const WithURLDataProfileContainerComponent = withRouter(ProfileSetContainer)//по факту возвращает новую компоненту в которую закинет ProfileSetContainer и к ним еще добавит инфу из URL 
 
-const ProfileContainer = connect(mapStateToProps, mapDispatchToProps) (ProfileSetContainer);
+const ProfileContainer = connect(mapStateToProps, {profileTextActionCreator, setNewProfileAC}) (WithURLDataProfileContainerComponent);
 
 export default ProfileContainer;

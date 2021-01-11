@@ -9,6 +9,7 @@
     grid-template-columns: 2fr 10fr;
     /* grid-gap: 10px; */
 font-size: 34px;
+
 }
 
 .header {
@@ -16,7 +17,8 @@ font-size: 34px;
   background-color: green;
 }
 .header img {
-  width: 20px;
+  width: 90px;
+  height: 70px;
 }
 
 .nav {
@@ -27,4 +29,8 @@ font-size: 34px;
 .content {
   grid-area: c;
   background-color: cornflowerblue;
+}
+.login{
+  position: absolute;
+  right: 0;
 }

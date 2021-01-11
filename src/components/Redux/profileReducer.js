@@ -10,7 +10,7 @@ const initialState = {
     {id:4, name:'Хало', like:9}
     ],
     textBeforePost: 'g',
-    profileData: []
+    profileData: null
 }
 
 

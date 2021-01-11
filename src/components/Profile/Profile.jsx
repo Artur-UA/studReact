@@ -6,7 +6,7 @@ import Preloader from '../../preloader/preloader'
 
 const Profile = (state) => {
     /* const messages = state.message.profilePage.message; */
-    const mess = state.messages.map(message => <Post name={message.name} like={message.like} />)
+    const mess = state.messages.map(message => <Post key={message.id} name={message.name} like={message.like} />)
 
     let newElement = React.createRef();
     
@@ -17,6 +17,7 @@ const Profile = (state) => {
         state.dispatch(profileTextActionCreator(text)) */
         state.profileTextActionCreator(text) 
     }
+
 
         if(!state.profileData) {
             return <Preloader/>
@@ -31,18 +32,15 @@ const Profile = (state) => {
                 
                 <div>
                     <div>
-                        {console.log(state)}
-                        <Preloader/>
-                        <img src={state.profileData.photos.small} alt='текст'/>
-                        {
-                            !state.profileData
-                                ? "эхеддлэ"
-                                
-                                : state.profileData.fullName/* <img src={state.profileData.photos.small} alt='текст'/>  */
-                        }
-                        
-                        
-                        img+status</div>
+                        <img src={state.profileData.photos.large} alt='текст'/>
+                        {state.profileData.aboutMe}
+                        <ul>
+                            <li>Facebook : {state.profileData.contacts.facebook}</li>
+                            <li>Twitter : {state.profileData.contacts.twitter}</li>
+                            <li>GitHub : {state.profileData.contacts.github}</li>
+                        </ul>
+                        <button onClick={state.goHome}>Вверх</button>
+                        </div>
                     <textarea ref={newElement} 
                             /* value={state.message.profilePage.textBeforePost} */
                             value={state.messagesValue}
