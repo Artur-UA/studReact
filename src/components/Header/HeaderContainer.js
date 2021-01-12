@@ -28,21 +28,20 @@ class HeaderContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    debugger;
     return{
         id:state.auth.id,
         login:state.auth.login,
         email:state.auth.email
     }
 }
-
+/* 
 const mapDispatchToProps = (dispatch) => {
     return{
-        authReducerAC: (data) => {
-            dispatch(authReducerAC(data))
+        authReducerAC: (id, login, email) => {
+            dispatch(authReducerAC(id, login, email))
         }
     }
-} 
+}  */
 
-export default connect (mapStateToProps, mapDispatchToProps) (HeaderContainer)
+export default connect (mapStateToProps, {authReducerAC}) (HeaderContainer)
 

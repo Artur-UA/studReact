@@ -1,8 +1,9 @@
 import React from 'react';
 import './Users.css';
-import Preloader from '../../preloader/preloader'
+import Preloader from '../preloader/preloader'
 import { NavLink } from 'react-router-dom';
-
+//import axios from 'axios'
+import {API} from '../api/api'
 
 const UsersCom = (props) => {
     
@@ -35,8 +36,31 @@ const UsersCom = (props) => {
                         <div>
                             
                                 {i.followed
-                                    ? <button onClick={() => props.friendshipAC(i.id)}>Отписаться</button>
-                                    : <button onClick={() => props.friendshipAC(i.id)}>Подписаться</button>
+                                    ? <button onClick={() => {
+                                        
+                                        /* axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${i.id}` , {
+                                            withCredentials: true,
+                                            headers: {
+                                                'API-KEY': '34443eba-6977-400d-8557-49de76758057'
+                                            }
+                                        }) */
+                                        API.deleteUsers(i.id)
+                                        props.friendshipAC(i.id)}
+                                    
+                                    }>Отписаться</button>
+
+                                    : <button onClick={() => {
+                                        
+                                        /* axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${i.id}`, {}, {
+                                            withCredentials: true,
+                                            headers: {
+                                                'API-KEY': '34443eba-6977-400d-8557-49de76758057'
+                                            }
+                                        }) */
+                                        API.postUsers(i.id)
+                                        props.friendshipAC(i.id)}
+                                    
+                                    }>Подписаться</button>
                                 }
                             
                         </div>

@@ -4,10 +4,13 @@ import '../../App.css'
 
 const Header = (props) => {
     console.log(props);
-    return <header className='header'>
-        {props.login} {props.email}{props.id} 
+    return <header className='header'> 
             <div className='login'>
-                <NavLink to={'/auth'}>Login</NavLink>
+                {
+                    props.id === null ?         
+                        <NavLink to={'/auth'}>Login</NavLink> :
+                        props.login
+                }
             </div>
             
         <img src='https://www.freelogodesign.org/Content/img/logo-ex-7.png'width="90" height="70" alt='text' />

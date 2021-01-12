@@ -12,7 +12,8 @@ import UsersContainer from './components/Friends/UsersContainer';
 const App = () => {
     return ( 
             <div className = 'app-wrapper' >
-                <HeaderContainer / >
+               <HeaderContainer / >
+
                 <Navbar /* data={props.state} 
                         dispatch={props.dispatch} */
                         /* info={props.addInfo} 

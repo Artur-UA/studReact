@@ -1,6 +1,6 @@
 import React from 'react';
 import Post from './Post/Post'
-import Preloader from '../../preloader/preloader'
+import Preloader from '../preloader/preloader'
 //import Dialogs from '../Message/Dialogs/Dialogs'
 //import {profileTextActionCreator} from '../Redux/profileReducer'
 

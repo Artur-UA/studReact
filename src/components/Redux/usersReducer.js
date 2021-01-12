@@ -12,8 +12,8 @@ const initialState = {
      */],
      totalUsers: 1000,
      usersInPage: 100,
-     numberPage: 5,
-     isPreloader: false
+     numberPage: 1,
+     isPreloader: true
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -31,7 +31,8 @@ const usersReducer = (state = initialState, action) => {
         case AddFriend:
             return {...state, dataFriend: [...state.dataFriend, ...action.data] }
         case NewList:
-            return {...state, dataFriend: action.response.data.items, numberPage: action.pop }
+            debugger
+            return {...state, dataFriend: action.response.items, numberPage: action.pop }
         case AllPage:
             return {...state, totalUsers: action.page }
         case ToogleIsPreloader:
