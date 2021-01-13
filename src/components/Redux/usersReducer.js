@@ -1,8 +1,10 @@
-export const Friend = "Friend";
-export const AddFriend = 'AddFriend';
-export const NewList = 'NewList';
-export const AllPage = 'AllPage';
-export const ToogleIsPreloader = 'ToogleIsPreloader';
+export const FRIEND = "FRIEND";
+export const ADD_FRIEND = 'ADD_FRIEND';
+export const NEW_LIST = 'NEW_LIST';
+export const ALL_PAGE = 'ALL_PAGE';
+export const TOOGLE_IS_PRELOADER = 'TOOGLE_IS_PRELOADER';
+export const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS'
+
 
 const initialState = {
     dataFriend: [/* 
@@ -10,15 +12,16 @@ const initialState = {
         {id: 2, friend: false, fullName: 'Sofia Loren', location: {city: 'Dnipro', country: 'Ukraine'}},
         {id: 3, friend: true, fullName: 'Viktor Popov', location: {city: 'Kharkiv', country: 'Ukraine'}}
      */],
-     totalUsers: 1000,
+     totalUsers: 0,
      usersInPage: 100,
      numberPage: 1,
-     isPreloader: true
+     isPreloader: true,
+     followingInProgress: false
 }
 
 const usersReducer = (state = initialState, action) => {
     switch(action.type) {
-        case Friend:
+        case FRIEND:
             return {
                 ...state,
                 dataFriend: state.dataFriend.map( d => {
@@ -28,24 +31,60 @@ const usersReducer = (state = initialState, action) => {
                     return d;
                 })
             }
-        case AddFriend:
+        case ADD_FRIEND:
             return {...state, dataFriend: [...state.dataFriend, ...action.data] }
-        case NewList:
-            debugger
+        case NEW_LIST:
             return {...state, dataFriend: action.response.items, numberPage: action.pop }
-        case AllPage:
+        case ALL_PAGE:
             return {...state, totalUsers: action.page }
-        case ToogleIsPreloader:
+        case TOOGLE_IS_PRELOADER:
             return {...state, isPreloader: action.boolean }
+        case FOLLOWING_IN_PROGRESS:
+            return {...state, followingInProgress: action.boolean}
         default:
             return state;
     }
 }
 
-export default usersReducer;
 
-export const friendshipAC = (id) => ({ type: Friend, id })
-export const addFriendAC = (data) => ({ type: AddFriend, data })
-export const newListAC = (response, pop) => ({ type: NewList, response, pop })
-export const allPageAC = (page) => ({ type: AllPage, page })
-export const toogleIsPreloaderAC = (boolean) => ({ type: ToogleIsPreloader, boolean })
+export const friendshipAC = (id) => ({ type: FRIEND, id })
+export const addFriendAC = (data) => ({ type: ADD_FRIEND, data })
+export const newListAC = (response, pop) => ({ type: NEW_LIST, response, pop })
+export const allPageAC = (page) => ({ type: ALL_PAGE, page })
+export const toogleIsPreloaderAC = (boolean) => ({ type: TOOGLE_IS_PRELOADER, boolean })
+export const followingInProgressAC = (boolean) => ({ type: FOLLOWING_IN_PROGRESS, boolean })
+
+
+export const followThunkCreator = (API, info) => {
+    return (dispatch) => {
+        dispatch(followingInProgressAC(true));
+        debugger
+        API.deleteUsers(info.id);
+        dispatch(friendshipAC(info.id));
+        dispatch(followingInProgressAC(false));
+    }
+}
+
+export const getAllUsersThunkCreator = (API, numberPage, usersInPage) => {
+    return (dispatch) => {
+        API.getUsers(numberPage, usersInPage)
+        .then(data => {  //уже приходит не response, а response.data(таким образом лишняя информация остается на уровну DAL )
+        console.log(data)
+        dispatch(addFriendAC(data.items))
+        dispatch(allPageAC(data.totalCount))
+        dispatch(toogleIsPreloaderAC(false))
+       
+        })
+    }
+} 
+
+export const getNewUsersThunkCreator = (API, pop, usersInPage) => {
+    return (dispatch) => {
+        API.getUsers(pop, usersInPage)
+                .then(response => {
+                dispatch(newListAC(response, pop));
+            })
+    }
+}
+
+export default usersReducer;

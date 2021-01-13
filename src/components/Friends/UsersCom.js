@@ -36,7 +36,7 @@ const UsersCom = (props) => {
                         <div>
                             
                                 {i.followed
-                                    ? <button onClick={() => {
+                                    ? <button disabled={props.followingInProgress} onClick={() => {
                                         
                                         /* axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${i.id}` , {
                                             withCredentials: true,
@@ -44,12 +44,20 @@ const UsersCom = (props) => {
                                                 'API-KEY': '34443eba-6977-400d-8557-49de76758057'
                                             }
                                         }) */
-                                        API.deleteUsers(i.id)
-                                        props.friendshipAC(i.id)}
+
+                                        /* props.followingInProgressAC(true);
+                                        API.deleteUsers(i.id);
+                                        props.friendshipAC(i.id);
+                                        props.followingInProgressAC(false); */
+
+
+                                        props.followThunkCreator(API, i)
+                                    }
                                     
                                     }>Отписаться</button>
 
-                                    : <button onClick={() => {
+                                    : <button disabled={props.followingInProgress} onClick={() => {
+                                        
                                         
                                         /* axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${i.id}`, {}, {
                                             withCredentials: true,
@@ -57,8 +65,13 @@ const UsersCom = (props) => {
                                                 'API-KEY': '34443eba-6977-400d-8557-49de76758057'
                                             }
                                         }) */
-                                        API.postUsers(i.id)
-                                        props.friendshipAC(i.id)}
+                                        /* props.followingInProgressAC(true);
+                                        API.postUsers(i.id);
+                                        props.friendshipAC(i.id);
+                                        props.followingInProgressAC(false); */
+
+                                        props.followThunkCreator(API, i)
+                                    }
                                     
                                     }>Подписаться</button>
                                 }

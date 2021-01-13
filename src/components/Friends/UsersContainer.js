@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
 //import Users from './UsersClass'
-import {friendshipAC, addFriendAC, newListAC, allPageAC, toogleIsPreloaderAC} from '../Redux/usersReducer'
+import {friendshipAC, addFriendAC, newListAC, allPageAC, toogleIsPreloaderAC, followingInProgressAC, followThunkCreator, getAllUsersThunkCreator, getNewUsersThunkCreator} from '../Redux/usersReducer'
 import UsersCom from './UsersCom'
 //import * as axios from 'axios'
 import {API} from '../api/api'
@@ -14,13 +14,16 @@ class Users extends Component {
         /* axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.numberPage}&count=${this.props.usersInPage}`, {
             withCredentials: true
         }) */
-        API.getUsers(this.props.numberPage, this.props.usersInPage)
+        /* API.getUsers(this.props.numberPage, this.props.usersInPage)
             .then(data => {  //уже приходит не response, а response.data(таким образом лишняя информация остается на уровну DAL )
             console.log(data)
             this.props.addFriendAC(data.items)
             this.props.allPageAC(data.totalCount)
-            this.props.toogleIsPreloaderAC(false)
-        })
+            this.props.toogleIsPreloaderAC(false) 
+        })*/
+
+            this.props.getAllUsersThunkCreator(API, this.props.numberPage, this.props.usersInPage)
+        
     };
 
     newPage = (pop) => {
@@ -28,14 +31,18 @@ class Users extends Component {
         /* axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pop}&count=${this.props.usersInPage}`, {
             withCredentials: true
         }) */
-            API.getUsers(pop, this.props.usersInPage)
+            /* API.getUsers(pop, this.props.usersInPage)
                 .then(response => {
                 this.props.newListAC(response, pop);
-            })
+            }) */
+
+            getNewUsersThunkCreator(API, pop, this.props.usersInPage)
     }
 
     render() {
-         return <UsersCom totalUsers={ this.props.totalUsers} usersInPage={this.props.usersInPage} numberPage={this.props.numberPage} newPage={this.newPage} info={this.props.info} friendshipAC={this.props.friendshipAC} isPreloader={this.props.isPreloader}/>
+         return <UsersCom totalUsers={ this.props.totalUsers} usersInPage={this.props.usersInPage} numberPage={this.props.numberPage} newPage={this.newPage} info={this.props.info} friendshipAC={this.props.friendshipAC} isPreloader={this.props.isPreloader} 
+         followingInProgress={this.props.followingInProgress} followingInProgressAC={this.props.followingInProgressAC}
+         followThunkCreator={this.props.followThunkCreator}/>
         }
     }
 
@@ -46,7 +53,8 @@ let mapStateToProps = (state) => {
         totalUsers: state.usersPage.totalUsers,
         usersInPage: state.usersPage.usersInPage,
         numberPage: state.usersPage.numberPage,
-        isPreloader: state.usersPage.isPreloader
+        isPreloader: state.usersPage.isPreloader,
+        followingInProgress : state.usersPage.followingInProgress
     }
 }
 
@@ -75,7 +83,11 @@ const UsersContainer = connect(mapStateToProps, {
     addFriendAC,
     newListAC,
     allPageAC,
-    toogleIsPreloaderAC
+    toogleIsPreloaderAC,
+    followingInProgressAC,
+    followThunkCreator,
+    getAllUsersThunkCreator,
+    getNewUsersThunkCreator
 }) (Users);
 
 export default UsersContainer;
