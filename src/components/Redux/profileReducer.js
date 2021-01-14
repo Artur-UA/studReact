@@ -40,7 +40,16 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export default profileReducer;
-
 export const profileTextActionCreator = (text) => ({type:PROFILE_TEXT, textInfo:text})
 export const setNewProfileAC = (profileData) => ({type: SET_NEW_PROFILE, profileData})
+
+export const infoUserDataThunkCreator = (API_Profile, nameId) => {
+    return (dispatch) => {
+        API_Profile.getUsersInfo(nameId)
+        .then(response => {
+            dispatch(setNewProfileAC(response.data))
+        })
+    }
+}
+
+export default profileReducer;

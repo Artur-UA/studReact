@@ -1,6 +1,6 @@
 import React from 'react';
 import './Profice.css'
-import {NavLink} from 'react-router-dom'
+import {NavLink, Redirect} from 'react-router-dom'
 //import {ItemMess} from './DialogsItem';
 //import {dialogTextActionCreator, dialogTextSendActionCreator} from '../Redux/messageReducer'
 
@@ -28,7 +28,11 @@ const Messages = (props) => {
         props.dialogTextSendActionCreator()
     }
 
+    debugger
+    if (props.auth === false) return <Redirect to={'/login'} />
+
     return (
+        
         <div className="dialogs">
             <div className="dialogsName">
 

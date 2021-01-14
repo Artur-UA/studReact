@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 //import MyContext from '../Redux/context';
-import {profileTextActionCreator} from '../Redux/profileReducer'
+import {profileTextActionCreator, infoUserDataThunkCreator, setNewProfileAC} from '../Redux/profileReducer'
 import Profile from './Profile';
 import {connect} from 'react-redux'
-import axios from 'axios';
-import {setNewProfileAC} from '../Redux/profileReducer'
+//import axios from 'axios';
 import {withRouter} from 'react-router-dom'
+import {API_Profile} from '../api/api'
 
 /* const ProfileContainer = () => {
     /* const messages = state.state.profilePage.message;
@@ -33,7 +33,7 @@ import {withRouter} from 'react-router-dom'
 export default ProfileContainer; */
 
 class ProfileSetContainer extends Component {
-
+    
     componentDidMount(){
         let nameId = this.props.match.params.name_id;
 
@@ -41,16 +41,13 @@ class ProfileSetContainer extends Component {
             nameId = 1055
         }
 
-        axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + nameId)
+        /* axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + nameId) */
+        /* API_Profile.getUsersInfo(nameId)
         .then(response => {
-            console.log(response)
             this.props.setNewProfileAC(response.data)
-
-        })
-    }
-
-    goHome = () => {
-        this.props.history.push('/pip')
+        }) */
+        
+        this.props.infoUserDataThunkCreator(API_Profile, nameId)
     }
 
     render(){
@@ -83,6 +80,6 @@ let mapStateToProps = (state) => {
 
 const WithURLDataProfileContainerComponent = withRouter(ProfileSetContainer)//по факту возвращает новую компоненту в которую закинет ProfileSetContainer и к ним еще добавит инфу из URL 
 
-const ProfileContainer = connect(mapStateToProps, {profileTextActionCreator, setNewProfileAC}) (WithURLDataProfileContainerComponent);
+const ProfileContainer = connect(mapStateToProps, {profileTextActionCreator, setNewProfileAC, infoUserDataThunkCreator}) (WithURLDataProfileContainerComponent);
 
 export default ProfileContainer;

@@ -8,6 +8,7 @@ import {Route} from 'react-router-dom'
 import MessagesContainer from './components/Messages/MessageContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Friends/UsersContainer';
+import LoginContainer from './components/Login/LoginConteiner'
 
 const App = () => {
     return ( 
@@ -30,6 +31,7 @@ const App = () => {
                                                                     img={props.state.profilePage}  
                                                                     dispatch={props.dispatch}/>*/}/>
                        <Route path='/users' render={() => <UsersContainer/>}/>
+                       <Route path='/login' render={() => <LoginContainer/>}/>
                     </div>
             </div> 
     )

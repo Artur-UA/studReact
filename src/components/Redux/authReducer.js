@@ -3,7 +3,8 @@ export const SET_USER_DATA = 'SET_USER_DATA'
 const initialState = {
         id: null,
         login: null,
-        email: null
+        email: null,
+        inAuth: false
 }
 
 const authReducer = (state = initialState, action) => {
@@ -11,7 +12,8 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data
+                ...action.data,
+                inAuth: true
             }
         default: 
             return state;
@@ -20,4 +22,18 @@ const authReducer = (state = initialState, action) => {
 
 
 export const authReducerAC = (id, login, email) => ({type: SET_USER_DATA, data: {id, login, email}})
+
+export const authThunkCreator = (API_Auth) => {
+    return (dispatch) => {
+        debugger
+        API_Auth().then(response => {
+            console.log(response);
+            if(response.data.resultCode === 0 ) {
+                let {id, login, email} = response.data.data;
+                dispatch(authReducerAC(id, login, email))
+            }
+        })
+    }
+}
+
 export default authReducer;

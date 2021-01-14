@@ -19,7 +19,7 @@ const UsersCom = (props) => {
             {props.isPreloader? <Preloader/> : undefined}
             <div>
                 {pages.map(pop => { 
-                    return  <span key={pop}className={props.numberPage === pop ? 'activePage': undefined}
+                    return  <span key={pop} className={props.numberPage === pop ? 'activePage': undefined}
                         onClick={ (e) => {props.newPage(pop)}}
                     >{pop}</span>
                     
@@ -51,7 +51,7 @@ const UsersCom = (props) => {
                                         props.followingInProgressAC(false); */
 
 
-                                        props.followThunkCreator(API, i)
+                                        props.followThunkCreator(API.deleteUsers, i)
                                     }
                                     
                                     }>Отписаться</button>
@@ -70,7 +70,7 @@ const UsersCom = (props) => {
                                         props.friendshipAC(i.id);
                                         props.followingInProgressAC(false); */
 
-                                        props.followThunkCreator(API, i)
+                                        props.followThunkCreator(API.postUsers, i)
                                     }
                                     
                                     }>Подписаться</button>

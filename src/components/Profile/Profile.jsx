@@ -18,7 +18,6 @@ const Profile = (state) => {
         state.profileTextActionCreator(text) 
     }
 
-
         if(!state.profileData) {
             return <Preloader/>
         }
@@ -32,7 +31,7 @@ const Profile = (state) => {
                 
                 <div>
                     <div>
-                        <img src={state.profileData.photos.large} alt='текст'/>
+                        <img src={state.profileData.photos.large || 'https://lh3.googleusercontent.com/proxy/QxH2QDTTbgmSQqeYG1CDLnBvr8EoiMOgbmdWOOU6AO2qYCAOSzTPSqvvYebiLYooXCSI23FXMo9d4k0SKcawjKyMONa6ZQ8CZLHgcq9ddKrc9C0'} alt='текст'/>
                         {state.profileData.aboutMe}
                         <ul>
                             <li>Facebook : {state.profileData.contacts.facebook}</li>

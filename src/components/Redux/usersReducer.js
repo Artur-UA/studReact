@@ -58,18 +58,26 @@ export const followingInProgressAC = (boolean) => ({ type: FOLLOWING_IN_PROGRESS
 export const followThunkCreator = (API, info) => {
     return (dispatch) => {
         dispatch(followingInProgressAC(true));
-        debugger
-        API.deleteUsers(info.id);
+        API(info.id);
         dispatch(friendshipAC(info.id));
         dispatch(followingInProgressAC(false));
     }
 }
 
+/* export const unfollowThunkCreator = (API, info) => {
+    return (dispatch) => {
+        dispatch(followingInProgressAC(true));
+        API.deleteUsers(info.id);
+        dispatch(friendshipAC(info.id));
+        dispatch(followingInProgressAC(false));
+    }
+} */
+
 export const getAllUsersThunkCreator = (API, numberPage, usersInPage) => {
     return (dispatch) => {
+        dispatch(toogleIsPreloaderAC(true)) 
         API.getUsers(numberPage, usersInPage)
         .then(data => {  //уже приходит не response, а response.data(таким образом лишняя информация остается на уровну DAL )
-        console.log(data)
         dispatch(addFriendAC(data.items))
         dispatch(allPageAC(data.totalCount))
         dispatch(toogleIsPreloaderAC(false))
@@ -80,10 +88,12 @@ export const getAllUsersThunkCreator = (API, numberPage, usersInPage) => {
 
 export const getNewUsersThunkCreator = (API, pop, usersInPage) => {
     return (dispatch) => {
+        dispatch(toogleIsPreloaderAC(true)) 
         API.getUsers(pop, usersInPage)
                 .then(response => {
                 dispatch(newListAC(response, pop));
             })
+            dispatch(toogleIsPreloaderAC(false))
     }
 }
 

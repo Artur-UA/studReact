@@ -1,4 +1,4 @@
-import axios from 'axios'
+import * as axios from 'axios'
 
 const instanceAPI = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -29,18 +29,26 @@ export const postUsers = (id) => {
 } */
 
 export const API = {
-    getUsers (numberPage, usersInPage) {
+    getUsers(numberPage, usersInPage) {
         return instanceAPI.get(`users?page=${numberPage}&count=${usersInPage}`)
             .then(response => {
                 return response.data
             })
     },
-
-    deleteUsers (id){
+    deleteUsers(id){
         return instanceAPI.delete(`follow/${id}`)        
-    },
-    
-    postUsers (id) {
+    }, 
+    postUsers(id) {
         return instanceAPI.post(`follow/${id}`)
     }
+}
+
+export const API_Profile = {
+    getUsersInfo (idUsers) {
+        return instanceAPI.get('profile/' + idUsers)
+    }
+}
+
+export const API_Auth = () => {
+    return instanceAPI.get('auth/me')
 }

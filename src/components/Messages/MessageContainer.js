@@ -37,10 +37,13 @@ import {connect} from 'react-redux'
 } */
 
 let mapStateToProps = (state) => {
+    
+debugger
     return{
         value: state.messagePage.textTest,
         item: state.messagePage.people,
-        mes:state.messagePage.dialogs
+        mes:state.messagePage.dialogs,
+        auth: state.auth.inAuth
     }
 }
 
