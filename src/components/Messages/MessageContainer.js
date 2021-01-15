@@ -3,6 +3,7 @@
 import { dialogTextActionCreator, dialogTextSendActionCreator } from '../Redux/messageReducer';
 import Messages from './Message'
 import {connect} from 'react-redux'
+import {withAuthRedirect} from '../hoc/withAuthRedirect'
 
 /* const MessagesContainer = () => { */
 
@@ -37,13 +38,11 @@ import {connect} from 'react-redux'
 } */
 
 let mapStateToProps = (state) => {
-    
-debugger
     return{
         value: state.messagePage.textTest,
         item: state.messagePage.people,
         mes:state.messagePage.dialogs,
-        auth: state.auth.inAuth
+        /* auth: state.auth.inAuth */
     }
 }
 
@@ -59,6 +58,8 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-const MessagesContainer = connect(mapStateToProps, mapDispatchToProps) (Messages);
+/* let withLoginRedirect = withAuthRedirect(Messages) */
+
+const MessagesContainer = withAuthRedirect(connect(mapStateToProps, mapDispatchToProps) (Messages));
 
 export default MessagesContainer;

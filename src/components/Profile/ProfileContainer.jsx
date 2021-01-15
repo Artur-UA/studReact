@@ -4,8 +4,9 @@ import {profileTextActionCreator, infoUserDataThunkCreator, setNewProfileAC} fro
 import Profile from './Profile';
 import {connect} from 'react-redux'
 //import axios from 'axios';
-import {withRouter} from 'react-router-dom'
+import {/* Redirect, */ withRouter} from 'react-router-dom'
 import {API_Profile} from '../api/api'
+import {withAuthRedirect} from '../hoc/withAuthRedirect'
 
 /* const ProfileContainer = () => {
     /* const messages = state.state.profilePage.message;
@@ -51,6 +52,7 @@ class ProfileSetContainer extends Component {
     }
 
     render(){
+       /*  if (!this.props.auth) return <Redirect to={'/login'}/> */
         return(
             <Profile {...this.props}/>
         )
@@ -58,11 +60,14 @@ class ProfileSetContainer extends Component {
     
 }
 
+let withLoginRedirect = withAuthRedirect(ProfileSetContainer)
+
 let mapStateToProps = (state) => {
         return{
             messagesValue: state.profilePage.textBeforePost,
             messages: state.profilePage.message,
-            profileData: state.profilePage.profileData
+            profileData: state.profilePage.profileData,
+            auth: state.auth.inAuth
         }
     }
 
@@ -78,7 +83,7 @@ let mapStateToProps = (state) => {
         }
 } */
 
-const WithURLDataProfileContainerComponent = withRouter(ProfileSetContainer)//по факту возвращает новую компоненту в которую закинет ProfileSetContainer и к ним еще добавит инфу из URL 
+const WithURLDataProfileContainerComponent = withRouter(withLoginRedirect)//по факту возвращает новую компоненту в которую закинет ProfileSetContainer и к ним еще добавит инфу из URL 
 
 const ProfileContainer = connect(mapStateToProps, {profileTextActionCreator, setNewProfileAC, infoUserDataThunkCreator}) (WithURLDataProfileContainerComponent);
 

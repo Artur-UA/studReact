@@ -5,6 +5,7 @@ import {friendshipAC, addFriendAC, newListAC, allPageAC, toogleIsPreloaderAC, fo
 import UsersCom from './UsersCom'
 //import * as axios from 'axios'
 import {API} from '../api/api'
+import {withAuthRedirect} from '../hoc/withAuthRedirect'
 
 class Users extends Component {
     
@@ -51,6 +52,7 @@ class Users extends Component {
         }
     }
 
+let withLoginRedirect = withAuthRedirect(Users)
 
 let mapStateToProps = (state) => {
     return {
@@ -93,6 +95,6 @@ const UsersContainer = connect(mapStateToProps, {
     followThunkCreator,
     getAllUsersThunkCreator,
     getNewUsersThunkCreator
-}) (Users);
+}) (withLoginRedirect); 
 
 export default UsersContainer;
