@@ -25,7 +25,6 @@ export const authReducerAC = (id, login, email) => ({type: SET_USER_DATA, data: 
 
 export const authThunkCreator = (API_Auth) => {
     return (dispatch) => {
-        debugger
         API_Auth().then(response => {
             console.log(response);
             if(response.data.resultCode === 0 ) {

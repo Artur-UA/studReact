@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 //import MyContext from '../Redux/context';
-import {profileTextActionCreator, infoUserDataThunkCreator, setNewProfileAC} from '../Redux/profileReducer'
+import {profileTextActionCreator, infoUserDataThunkCreator, setNewProfileAC, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator} from '../Redux/profileReducer'
 import Profile from './Profile';
 import {connect} from 'react-redux'
 //import axios from 'axios';
 import {/* Redirect, */ withRouter} from 'react-router-dom'
 import {API_Profile} from '../api/api'
-import {withAuthRedirect} from '../hoc/withAuthRedirect'
+//import {withAuthRedirect} from '../hoc/withAuthRedirect'
+import { compose } from 'redux';
 
 /* const ProfileContainer = () => {
     /* const messages = state.state.profilePage.message;
@@ -49,7 +50,21 @@ class ProfileSetContainer extends Component {
         }) */
         
         this.props.infoUserDataThunkCreator(API_Profile, nameId)
+
+        /* API_Profile.getUserStatus(nameId)
+            .then(response=> {
+                this.props.getStatusAC(response.data)
+            })
+         */
+        this.props.getStatusThunkCreator(API_Profile, nameId)
+
     }
+
+    /* updateStatus() {API_Profile.updateUserStatus(this.props.status)
+            .then(response => {
+                console.log(response)
+            })
+    } */
 
     render(){
        /*  if (!this.props.auth) return <Redirect to={'/login'}/> */
@@ -60,14 +75,15 @@ class ProfileSetContainer extends Component {
     
 }
 
-let withLoginRedirect = withAuthRedirect(ProfileSetContainer)
+/* let withLoginRedirect = withAuthRedirect(ProfileSetContainer) */
 
 let mapStateToProps = (state) => {
         return{
             messagesValue: state.profilePage.textBeforePost,
             messages: state.profilePage.message,
             profileData: state.profilePage.profileData,
-            auth: state.auth.inAuth
+            auth: state.auth.inAuth,
+            status: state.profilePage.status
         }
     }
 
@@ -83,8 +99,15 @@ let mapStateToProps = (state) => {
         }
 } */
 
-const WithURLDataProfileContainerComponent = withRouter(withLoginRedirect)//по факту возвращает новую компоненту в которую закинет ProfileSetContainer и к ним еще добавит инфу из URL 
+//const WithURLDataProfileContainerComponent = withRouter(withLoginRedirect)//по факту возвращает новую компоненту в которую закинет ProfileSetContainer и к ним еще добавит инфу из URL 
 
-const ProfileContainer = connect(mapStateToProps, {profileTextActionCreator, setNewProfileAC, infoUserDataThunkCreator}) (WithURLDataProfileContainerComponent);
+/* const ProfileContainer = connect(mapStateToProps, {profileTextActionCreator, setNewProfileAC, infoUserDataThunkCreator}) (WithURLDataProfileContainerComponent);
 
-export default ProfileContainer;
+export default ProfileContainer; */
+
+export default compose(
+    connect(mapStateToProps, {profileTextActionCreator, setNewProfileAC, infoUserDataThunkCreator, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator}),
+    withRouter
+    /* withAuthRedirect */
+)
+(ProfileSetContainer)

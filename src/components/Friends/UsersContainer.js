@@ -97,4 +97,4 @@ const UsersContainer = connect(mapStateToProps, {
     getNewUsersThunkCreator
 }) (withLoginRedirect); 
 
-export default UsersContainer;
+export default UsersContainer; 

@@ -6,6 +6,7 @@ import Preloader from '../preloader/preloader'
 import Status from './Status'
 
 const Profile = (state) => {
+    console.log(state);
     /* const messages = state.message.profilePage.message; */
     const mess = state.messages.map(message => <Post key={message.id} name={message.name} like={message.like} />)
 
@@ -32,15 +33,17 @@ const Profile = (state) => {
                 
                 <div>
                     <div>
-                        <img src={state.profileData.photos.large || 'https://lh3.googleusercontent.com/proxy/QxH2QDTTbgmSQqeYG1CDLnBvr8EoiMOgbmdWOOU6AO2qYCAOSzTPSqvvYebiLYooXCSI23FXMo9d4k0SKcawjKyMONa6ZQ8CZLHgcq9ddKrc9C0'} alt='текст'/>
-                        <Status />
+                        <img src={state.profileData.photos.large || 'https://lh3.googleusercontent.com/proxy/DbsJgF_Y7fw8C5XgllCF96KCq8-wrIvZ58k8I3Qcq-EVsx8TevX0UWRXMGkquZ8M7UEdl8LYSPmEfY8_JKj5edIrJ6hfBZlz6dO-X_Mb7JI1KEFoZYpSJ5IT_hNlAfJBRrZ79wc'} alt='текст'/>
+                        <Status status={state.status} updateStatus={state.updateStatusThunkCreator}/>
+                        <br/>
+                        {state.status}<br/>
                         {state.profileData.aboutMe}
                         <ul>
                             <li>Facebook : {state.profileData.contacts.facebook}</li>
                             <li>Twitter : {state.profileData.contacts.twitter}</li>
                             <li>GitHub : {state.profileData.contacts.github}</li>
                         </ul>
-                        <button onClick={state.goHome}>Вверх</button>
+                        {/* <button onClick={() => (state.updateStatus)}>Статус</button> */}
                         </div>
                     <textarea ref={newElement} 
                             /* value={state.message.profilePage.textBeforePost} */
@@ -59,8 +62,6 @@ const Profile = (state) => {
                     post 2
             </div>
             </div>
-
-
 
         </div>
     )

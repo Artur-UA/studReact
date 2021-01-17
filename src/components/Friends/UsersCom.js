@@ -13,7 +13,6 @@ const UsersCom = (props) => {
     for( let i = 1; i <= pagesCount; i++) {
         pages.push(i) 
         }
-
     return (
         <>
             {props.isPreloader? <Preloader/> : undefined}
@@ -21,7 +20,7 @@ const UsersCom = (props) => {
                 {pages.map(pop => { 
                     return  <span key={pop} className={props.numberPage === pop ? 'activePage': undefined}
                         onClick={ (e) => {props.newPage(pop)}}
-                    >{pop}</span>
+                        >{pop}</span>
                     
                 })}
 
