@@ -1,3 +1,5 @@
+import {API_Profile} from '../api/api'
+
 export const PROFILE_TEXT = 'PROFILE_TEXT';
 export const SET_NEW_PROFILE = 'SET_NEW_PROFILE';
 export const GET_STATUS = 'GET_STATUS'
@@ -68,8 +70,8 @@ export const getStatusThunkCreator = (API_Profile, nameId) => {
     }
 }
 
-export const updateStatusThunkCreator = (API_Profile, status) => {
-    return (dispatch) => {
+export const updateStatusThunkCreator = (status) => {
+    return (dispatch) => { 
         API_Profile.updateUserStatus(status)
             .then(response => {
                 if (response.data.resultCode === 0) {

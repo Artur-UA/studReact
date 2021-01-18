@@ -1,3 +1,5 @@
+import {API_Login} from '../api/api'
+
 export const SET_USER_DATA = 'SET_USER_DATA'
 
 const initialState = {
@@ -32,6 +34,25 @@ export const authThunkCreator = (API_Auth) => {
                 dispatch(authReducerAC(id, login, email))
             }
         })
+    }
+}
+
+export const loginThunkCreator = (data) => {
+    return () => {
+        let {email, password, rememberMe} = data;
+        API_Login.login(email, password, rememberMe)
+            .then(response => {
+                console.log(response);
+            })
+    }
+}
+
+export const logoutThunkCreator = () => {
+    return () => {
+        API_Login.logout()
+            .then(response => {
+                console.log(response);
+            })
     }
 }
 

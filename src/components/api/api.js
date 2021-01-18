@@ -42,7 +42,6 @@ export const API = {
         return instanceAPI.post(`follow/${id}`)
     }
 }
-
 export const API_Profile = {
     getUsersInfo (idUsers) {
         return instanceAPI.get('profile/' + idUsers)
@@ -57,4 +56,13 @@ export const API_Profile = {
 
 export const API_Auth = () => {
     return instanceAPI.get('auth/me')
+}
+
+export const API_Login = {
+    login(email, password) {
+        return instanceAPI.post('/auth/login', {email: email, password: password})
+    },
+    logout() {
+        return instanceAPI.delete('/auth/login')
+    }
 }

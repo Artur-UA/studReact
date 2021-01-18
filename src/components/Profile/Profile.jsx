@@ -33,7 +33,7 @@ const Profile = (state) => {
                 
                 <div>
                     <div>
-                        <img src={state.profileData.photos.large || 'https://lh3.googleusercontent.com/proxy/DbsJgF_Y7fw8C5XgllCF96KCq8-wrIvZ58k8I3Qcq-EVsx8TevX0UWRXMGkquZ8M7UEdl8LYSPmEfY8_JKj5edIrJ6hfBZlz6dO-X_Mb7JI1KEFoZYpSJ5IT_hNlAfJBRrZ79wc'} alt='текст'/>
+                        <img src={state.profileData.photos.large || 'https://socialvk.ru/wp-content/uploads/avatarka-pustaya-vk_23.jpg'} alt='текст'/>
                         <Status status={state.status} updateStatus={state.updateStatusThunkCreator}/>
                         <br/>
                         {state.status}<br/>
