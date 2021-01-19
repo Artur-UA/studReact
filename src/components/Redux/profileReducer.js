@@ -4,6 +4,7 @@ export const PROFILE_TEXT = 'PROFILE_TEXT';
 export const SET_NEW_PROFILE = 'SET_NEW_PROFILE';
 export const GET_STATUS = 'GET_STATUS'
 export const UPDATE_STATUS = 'UPDATE_STATUS'
+export const NEW_PROFILE_REDUX_FORM = 'NEW_PROFILE_REDUX_FORM'
 
 
 const initialState = {
@@ -43,6 +44,12 @@ const profileReducer = (state = initialState, action) => {
         case GET_STATUS: {
             return {...state, status: action.status}
         }
+        case NEW_PROFILE_REDUX_FORM: {
+            return {
+                ...state, 
+                message: [...state.message, {id: state.message.length + 1, name: action.profile, like: 38}]
+            }
+        }
         default:
             return state;
     }
@@ -51,6 +58,7 @@ const profileReducer = (state = initialState, action) => {
 export const profileTextActionCreator = (text) => ({type:PROFILE_TEXT, textInfo:text})
 export const setNewProfileAC = (profileData) => ({type: SET_NEW_PROFILE, profileData})
 export const getStatusAC = (info) => ({type: GET_STATUS, status: info})
+export const newProfileFormReduxAC = (profile) => ({type: NEW_PROFILE_REDUX_FORM, profile})
 
 export const infoUserDataThunkCreator = (API_Profile, nameId) => {
     return (dispatch) => {

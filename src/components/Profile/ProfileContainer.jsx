@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 //import MyContext from '../Redux/context';
-import {profileTextActionCreator, infoUserDataThunkCreator, setNewProfileAC, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator} from '../Redux/profileReducer'
+import {profileTextActionCreator, infoUserDataThunkCreator, setNewProfileAC, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator, newProfileFormReduxAC} from '../Redux/profileReducer'
 import Profile from './Profile';
 import {connect} from 'react-redux'
 //import axios from 'axios';
@@ -106,7 +106,7 @@ let mapStateToProps = (state) => {
 export default ProfileContainer; */
 
 export default compose(
-    connect(mapStateToProps, {profileTextActionCreator, setNewProfileAC, infoUserDataThunkCreator, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator}),
+    connect(mapStateToProps, {profileTextActionCreator, setNewProfileAC, infoUserDataThunkCreator, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator, newProfileFormReduxAC}),
     withRouter
     /* withAuthRedirect */
 )

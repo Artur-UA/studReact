@@ -1,6 +1,6 @@
 //import React from 'react';
 //import MyContext from '../Redux/context';
-import {addPostActionCreator, newTextActionCreator} from '../Redux/navbarReducer'
+import {addPostActionCreator, newTextActionCreator, newTextReduxFormActionCreator} from '../Redux/navbarReducer'
 import Friends from './friends';
 import {connect} from 'react-redux'
 
@@ -53,7 +53,10 @@ let mapDispatchToProps = (dispatch) => {
             let action = newTextActionCreator(text);
             dispatch(action)
         },
-        addPostActionCreator: () => dispatch(addPostActionCreator())
+        addPostActionCreator: () => dispatch(addPostActionCreator()),
+        newTextReduxFormActionCreator:(message) => {
+            dispatch(newTextReduxFormActionCreator(message))
+        }
     }
 }
 

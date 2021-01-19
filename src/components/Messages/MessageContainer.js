@@ -1,6 +1,6 @@
 //import React from 'react';
 //import MyContext from '../Redux/context';
-import { dialogTextActionCreator, dialogTextSendActionCreator } from '../Redux/messageReducer';
+import { dialogTextActionCreator, dialogTextSendActionCreator, dialogTextSendReduxFromActionCreator} from '../Redux/messageReducer';
 import Messages from './Message'
 import {connect} from 'react-redux'
 import {withAuthRedirect} from '../hoc/withAuthRedirect'
@@ -54,6 +54,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         dialogTextSendActionCreator: () => {
             dispatch(dialogTextSendActionCreator())
+        },
+        dialogTextSendReduxFromActionCreator: (message) => {
+            dispatch(dialogTextSendReduxFromActionCreator(message))
         }
     }
 }

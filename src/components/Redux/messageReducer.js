@@ -1,5 +1,6 @@
 export const DIALOG_TEXT = 'DIALOG_TEXT';
 export const DIALOG_TEXT_SEND = 'DIALOG_TEXT_SEND';
+export const DIALOG_TEXT_SEND_REDUX_FORM = 'DIALOG_TEXT_SEND_REDUX_FORM';
 
 const initialState = {
         people: [
@@ -45,7 +46,14 @@ const messageReducer = (state = initialState, action) => {
             return {...state,
                 dialogs: [...state.dialogs, {id : state.dialogs.length +1, message : state.textTest}],
                 textTest: ''
-            };
+            }
+        }
+        case DIALOG_TEXT_SEND_REDUX_FORM: {
+            let text = action.message;
+            return{ 
+                ...state,
+                dialogs: [...state.dialogs, {id : state.dialogs.length +1, message : text} ]
+            }
         }
         default: 
             return state
@@ -57,3 +65,5 @@ export default messageReducer;
 export const dialogTextActionCreator = (info) => ({type : DIALOG_TEXT, infoText: info})
 
 export const dialogTextSendActionCreator = () => ({type: DIALOG_TEXT_SEND})
+
+export const dialogTextSendReduxFromActionCreator = (message) => ({type: DIALOG_TEXT_SEND_REDUX_FORM, message})

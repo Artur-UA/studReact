@@ -3,24 +3,27 @@ import './Profice.css'
 import {NavLink/* , Redirect */} from 'react-router-dom'
 //import {ItemMess} from './DialogsItem';
 //import {dialogTextActionCreator, dialogTextSendActionCreator} from '../Redux/messageReducer'
+import {Field, reduxForm} from 'redux-form'
+import {maxLengthCreator, required} from '../validate/validate'
+import {Textarea} from '../validate/textArea/FormControl'
 
 const Messages = (props) => {
     /* let item = props.info.messagePage.people;
     let mes = props.info.messagePage.dialogs; */
     
 
-    let dialogsPeople = props.item.map(items => <div><NavLink  to={`/message/${items.id}`}>{items.message}<img className='avatar2' src={items.img}  alt="альтернативный текст"/></NavLink></div>)
+    let dialogsPeople = props.item.map(items => <div key={items.id}><NavLink  to={`/message/${items.id}`}>{items.message}<img className='avatar2' src={items.img}  alt="альтернативный текст"/></NavLink></div>)
 
-    let dialogsMessages = props.mes.map(ItemMess => <div>{ItemMess.message}-{ItemMess.id}</div>)
+    let dialogsMessages = props.mes.map(ItemMess => <div key={ItemMess.id}>{ItemMess.message}-{ItemMess.id}</div>)
 
     const refArea = React.createRef();
 
-
-    console.log(props);
     const changedMessage = (e) => {
 /*         let valueMessage = refArea.current.value; */
-        let valueMessage = e.target.value;
         /* props.dispatch(dialogTextActionCreator(valueMessage)) */
+
+
+        let valueMessage = e.target.value;
         props.dialogTextActionCreator(valueMessage)
     }
 
@@ -28,6 +31,11 @@ const Messages = (props) => {
         props.dialogTextSendActionCreator()
     }
     /* if (props.auth === false) return <Redirect to={'/login'} /> */
+
+    const addNewMessage = (data) => {
+        console.log(data.message);
+        props.dialogTextSendReduxFromActionCreator(data.message)
+    }
 
     return (
         
@@ -73,6 +81,8 @@ const Messages = (props) => {
                         />
                 <button onClick={changedRender}>Click</button>
 
+              <MessageReduxForm onSubmit={addNewMessage}/>
+
               {/*   {
                     ItemMess.map(ItemMess => {
                         return (
@@ -89,5 +99,21 @@ const Messages = (props) => {
         </div>
     )
 }
+
+const maxLength = maxLengthCreator(15)
+
+const MessageForm = (props) => {
+
+    /* component='textarea' */
+    
+    return(
+        <form onSubmit={props.handleSubmit}>
+            <Field component={Textarea} name='message' placeholder='Напишите свое сообщение' validate={[required, maxLength]} />
+            <button >Click</button>
+        </form>
+    )
+}
+
+const MessageReduxForm = reduxForm({form: "message"}) (MessageForm)
 
 export default Messages;

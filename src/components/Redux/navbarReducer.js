@@ -1,5 +1,6 @@
 export const ADD_POST = 'ADD_POST';
 export const NEW_TEXT = 'NEW_TEXT';
+export const NEW_TEXT_MESSAGE = 'NEW_TEXT_MESSAGE';
 
 const initialState = {
     friends: [
@@ -41,6 +42,12 @@ const navbarReducer = (state = initialState, action) => {
                 texts: action.text
             }
         }
+        case NEW_TEXT_MESSAGE: {
+            return {
+                ...state, 
+                friends: [...state.friends, {id: state.friends.length +1, name: action.message, img: 'https://demiart.ru/forum/uploads19/post-82312-1489784448.jpg'}]
+            }
+        }
         default:
             return state;
     }
@@ -51,3 +58,5 @@ export default navbarReducer;
 export const addPostActionCreator = () => ({type:ADD_POST})
 
 export const newTextActionCreator = (text) => ({type:NEW_TEXT, text:text})
+
+export const newTextReduxFormActionCreator = (message) => ({type:NEW_TEXT_MESSAGE, message})

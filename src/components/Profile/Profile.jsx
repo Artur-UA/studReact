@@ -4,6 +4,7 @@ import Preloader from '../preloader/preloader'
 //import Dialogs from '../Message/Dialogs/Dialogs'
 //import {profileTextActionCreator} from '../Redux/profileReducer'
 import Status from './Status'
+import {Field, reduxForm} from 'redux-form'
 
 const Profile = (state) => {
     console.log(state);
@@ -19,6 +20,11 @@ const Profile = (state) => {
         state.dispatch(profileTextActionCreator(text)) */
         state.profileTextActionCreator(text) 
     }
+
+    const addNewProfileMessage = (data) => {
+        console.log(data.profile)
+        state.newProfileFormReduxAC(data.profile)
+    } 
 
         if(!state.profileData) {
             return <Preloader/>
@@ -49,9 +55,11 @@ const Profile = (state) => {
                             /* value={state.message.profilePage.textBeforePost} */
                             value={state.messagesValue}
                             onChange={textSend}
-                            
                     />
                     <button onClick={textSend}>Жми</button>
+
+                    <ProfileFormRedux onSubmit={addNewProfileMessage}/>
+
                 </div>
 
                 {mess}
@@ -66,5 +74,17 @@ const Profile = (state) => {
         </div>
     )
 }
+
+const ProfileForm = (props) => {
+
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field component='textarea' name='profile' placeholder='Напишите имя'/>
+            <button>Начать</button>
+        </form>
+    )
+}
+
+const ProfileFormRedux = reduxForm ({form: 'profilePage'}) (ProfileForm)
 
 export default Profile;

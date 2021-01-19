@@ -1,5 +1,6 @@
 import React from 'react';
 //import {addPostActionCreator, newTextActionCreator} from '../Redux/navbarReducer'
+import {Field, reduxForm} from 'redux-form'
 
 const Friends = (props) => {
     /*let name = props.fr.friends;
@@ -30,6 +31,10 @@ const Friends = (props) => {
         
         console.log(text);
     } 
+    const sendFormRedux = (data) => {
+        console.log(data.friendsMessage)
+        props.newTextReduxFormActionCreator(data.friendsMessage)
+    }
 
     return (
         <div>
@@ -44,8 +49,22 @@ const Friends = (props) => {
             
             </div>
             <button onClick={addMessage}>Нажми</button>
+
+            <FriendsFormRedux onSubmit={sendFormRedux}/>
         </div>
     )
 }
+
+const FriendsForm = (props) => {
+    return(
+        <form onSubmit={props.handleSubmit}>
+            <Field component='textarea' placeholder='Напишите другу' name='friendsMessage'/>
+            <button>Нажать</button>
+        </form>
+    )
+}
+
+const FriendsFormRedux = reduxForm({form: 'friends'})(FriendsForm)
+
 
 export default Friends;
