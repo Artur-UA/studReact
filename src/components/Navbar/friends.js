@@ -1,6 +1,8 @@
 import React from 'react';
 //import {addPostActionCreator, newTextActionCreator} from '../Redux/navbarReducer'
 import {Field, reduxForm} from 'redux-form'
+import { Textarea } from '../validate/textArea/FormControl';
+import { maxLengthCreator, required } from '../validate/validate';
 
 const Friends = (props) => {
     /*let name = props.fr.friends;
@@ -55,10 +57,13 @@ const Friends = (props) => {
     )
 }
 
+const maxLength = maxLengthCreator(11)
+
 const FriendsForm = (props) => {
     return(
         <form onSubmit={props.handleSubmit}>
-            <Field component='textarea' placeholder='Напишите другу' name='friendsMessage'/>
+            <Field component={Textarea} placeholder='Напишите другу' name='friendsMessage'
+                        validate={[required, maxLength]} />
             <button>Нажать</button>
         </form>
     )

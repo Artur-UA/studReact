@@ -5,6 +5,8 @@ import Preloader from '../preloader/preloader'
 //import {profileTextActionCreator} from '../Redux/profileReducer'
 import Status from './Status'
 import {Field, reduxForm} from 'redux-form'
+import { maxLengthCreator, required} from '../validate/validate';
+import { Textarea } from '../validate/textArea/FormControl';
 
 const Profile = (state) => {
     console.log(state);
@@ -75,11 +77,14 @@ const Profile = (state) => {
     )
 }
 
+const maxLength = maxLengthCreator(7)
+
 const ProfileForm = (props) => {
 
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field component='textarea' name='profile' placeholder='Напишите имя'/>
+            <Field component={Textarea} name='profile' 
+                        placeholder='Напишите имя' validate={[required, maxLength]}/>
             <button>Начать</button>
         </form>
     )

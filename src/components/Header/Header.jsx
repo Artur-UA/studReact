@@ -3,13 +3,13 @@ import { NavLink } from 'react-router-dom';
 import '../../App.css'
 
 const Header = (props) => {
-    console.log(props);
+
     return <header className='header'> 
             <div className='login'>
                 {
                     props.id === null ?         
-                        <NavLink to={'/auth'}>Login</NavLink> :
-                        props.login
+                        <NavLink to={'/login'}>Login</NavLink> :
+                        <NavLink to={'/login'}>{props.login}</NavLink>
                 }
             </div>
             
