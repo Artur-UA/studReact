@@ -5,10 +5,13 @@ import {connect} from 'react-redux'
 import { maxLengthCreator, required } from '../validate/validate'
 import { Input } from '../validate/textArea/FormControl'
 import {Redirect} from 'react-router-dom'
+import '../validate/textArea/FormControl.css'
 
 const maxLength = maxLengthCreator(20)
 
+
 const LoginForm = (props) => {
+
     return (
         <>
             <div>LoginForm</div>
@@ -24,6 +27,11 @@ const LoginForm = (props) => {
                 <div>
                     <Field type='checkbox' name="rememberMe" component='input' /> remember me
                 </div>
+
+                { props.error && <div className='errorLogin'> 
+                    {props.error}
+                </div>} {/* покажет только если будет ошибка */}
+
                 <div>
                     <button>Send</button>
                 </div>
@@ -44,6 +52,7 @@ const ContactFormLogin = reduxForm({
 const LoginConteinerTest = (props) => {
 
     const receivingData = (form) => {
+        console.log(form);
         props.loginThunkCreator(form)
     }
     if (props.auth) {

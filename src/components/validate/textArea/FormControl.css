@@ -5,3 +5,7 @@
 .error2 input {
     border: red solid 3px;
 }
+
+.errorLogin{
+    color: rgb(194, 0, 0);
+}

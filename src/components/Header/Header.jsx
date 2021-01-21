@@ -7,9 +7,9 @@ const Header = (props) => {
     return <header className='header'> 
             <div className='login'>
                 {
-                    props.id === null ?         
-                        <NavLink to={'/login'}>Login</NavLink> :
-                        <NavLink to={'/login'}>{props.login}</NavLink>
+                    props.id === null 
+                        ? <NavLink to={'/login'}>Login</NavLink> 
+                        : <><NavLink to={'/login'}>{props.login}</NavLink> <button onClick={props.logoutThunkCreator}>Logout</button></>
                 }
             </div>
             

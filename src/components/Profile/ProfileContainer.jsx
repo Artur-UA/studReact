@@ -4,9 +4,9 @@ import {profileTextActionCreator, infoUserDataThunkCreator, setNewProfileAC, get
 import Profile from './Profile';
 import {connect} from 'react-redux'
 //import axios from 'axios';
-import {/* Redirect, */ withRouter} from 'react-router-dom'
+import {/* Redirect, */  withRouter} from 'react-router-dom'
 import {API_Profile} from '../api/api'
-//import {withAuthRedirect} from '../hoc/withAuthRedirect'
+import {withAuthRedirect} from '../hoc/withAuthRedirect'
 import { compose } from 'redux';
 
 /* const ProfileContainer = () => {
@@ -40,8 +40,11 @@ class ProfileSetContainer extends Component {
         let nameId = this.props.match.params.name_id;
 
         if(!nameId) {
-            nameId = 1055
-        }
+            nameId = this.props.id/* 1055 */
+         if (!nameId) {
+             this.props.history.push('/login')
+           /*  <Redirect to='/users' /> */
+        }}
 
         /* axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + nameId) */
         /* API_Profile.getUsersInfo(nameId)
@@ -83,7 +86,8 @@ let mapStateToProps = (state) => {
             messages: state.profilePage.message,
             profileData: state.profilePage.profileData,
             auth: state.auth.inAuth,
-            status: state.profilePage.status
+            status: state.profilePage.status,
+            id: state.auth.id
         }
     }
 
@@ -107,7 +111,7 @@ export default ProfileContainer; */
 
 export default compose(
     connect(mapStateToProps, {profileTextActionCreator, setNewProfileAC, infoUserDataThunkCreator, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator, newProfileFormReduxAC}),
-    withRouter
-    /* withAuthRedirect */
+    withRouter,
+    withAuthRedirect 
 )
 (ProfileSetContainer)

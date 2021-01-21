@@ -9,32 +9,59 @@ import MessagesContainer from './components/Messages/MessageContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Friends/UsersContainer';
 import LoginContainer from './components/Login/LoginConteiner'
+import { connect } from 'react-redux';
+import {initialThunkCreator} from './components/Redux/appReducer'
+import Preloader from './components/preloader/preloader'
 
-const App = () => {
-    return ( 
-            <div className = 'app-wrapper' >
-               <HeaderContainer / >
+class App extends React.Component {
 
-                <Navbar /* data={props.state} 
-                        dispatch={props.dispatch} */
-                        /* info={props.addInfo} 
-                        infoText={props.text} */ />
-                    <div>
-                        <Route path='/profile/:name_id?' render={()=> <ProfileContainer /* state={props.state} dispatch={props.dispatch} *//>
-                                                            /* <Profile message={props.state}
-                                                                    dispatch={props.dispatch}
-                                                                    profileText2={props.profileText1}/> */}/>
+    componentDidMount() {
+        this.props.initialThunkCreator()
+    }
+    render() {
 
-                        <Route path='/message' render={()=> <MessagesContainer /* state={props.state} dispatch={props.dispatch} *//>
-                                                            /*<Messages info={props.state} 
-                                                                      message={props.state.profilePage} 
-                                                                    img={props.state.profilePage}  
-                                                                    dispatch={props.dispatch}/>*/}/>
-                       <Route path='/users' render={() => <UsersContainer/>}/>
-                       <Route path='/login' render={() => <LoginContainer/>}/>
-                    </div>
-            </div> 
+        if (!this.props.initialized) {
+            return <Preloader />
+        }
+
+        return ( 
+        <div className = 'app-wrapper' >
+            <HeaderContainer / >
+
+            <Navbar /* data={props.state} 
+                    dispatch={props.dispatch} */
+                    /* info={props.addInfo} 
+                    infoText={props.text} */ />
+                <div>
+                    <Route path='/profile/:name_id?' render={()=> <ProfileContainer /* state={props.state} dispatch={props.dispatch} *//>
+                                                        /* <Profile message={props.state}
+                                                                dispatch={props.dispatch}
+                                                                profileText2={props.profileText1}/> */}/>
+
+                    <Route path='/message' render={()=> <MessagesContainer /* state={props.state} dispatch={props.dispatch} *//>
+                                                        /*<Messages info={props.state} 
+                                                                    message={props.state.profilePage} 
+                                                                img={props.state.profilePage}  
+                                                                dispatch={props.dispatch}/>*/}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
+                    <Route path='/login' render={() => <LoginContainer/>}/>
+                </div>
+        </div> 
     )
+    }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        initialized: state.app.initialized
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        initialThunkCreator: () => {
+            dispatch(initialThunkCreator())
+        }
+    }
+}
+export default connect (mapStateToProps, mapDispatchToProps)(App)

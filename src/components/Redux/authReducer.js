@@ -1,5 +1,5 @@
-import {API_Login} from '../api/api'
-
+import {API_Login, API_Auth} from '../api/api'
+import {stopSubmit} from 'redux-form'
 export const SET_USER_DATA = 'SET_USER_DATA'
 
 const initialState = {
@@ -14,8 +14,7 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.payload,
-                inAuth: true
+                ...action.payload
             }
         default: 
             return state;
@@ -23,11 +22,12 @@ const authReducer = (state = initialState, action) => {
 }
 
 
-export const authReducerAC = (id, login, email, boolean) => ({type: SET_USER_DATA, payload: {id, login, email}, inAuth: boolean})
+export const authReducerAC = (id, login, email, inAuth) => ({type: SET_USER_DATA, payload: {id, login, email, inAuth}})
 
-export const authThunkCreator = (API_Auth) => {
+export const authThunkCreator = () => {
     return (dispatch) => {
-        API_Auth().then(response => {
+        return API_Auth()
+            .then(response => {
             console.log(response);
             if(response.data.resultCode === 0 ) {
                 let {id, login, email} = response.data.data;
@@ -38,14 +38,18 @@ export const authThunkCreator = (API_Auth) => {
 }
 
 export const loginThunkCreator = (data) => {
+
     return (dispatch) => {
         let {email, password, rememberMe} = data;
         API_Login.login(email, password, rememberMe)
             .then(response => {
                 console.log(response);
                 if(response.data.resultCode === 0) {
-                    let {id, login, email} = response.data.data;
-                    dispatch(authReducerAC(id, login, email, true))
+                    dispatch(authThunkCreator())
+                } else {
+                    const message = response.data.messages.length > 0 ? response.data.messages : "Wrong Email or Password"
+                    const action = stopSubmit("login", {_error: message}) //stopSubmit это спец метод из redux-form который позволяет показать ошибку, настаиваем его и делаем dispatch. В настройке пишем первым пунктом название формы, вторым name Field которое подсветит красным. _error это значит что-то в форме неправильно 
+                    dispatch(action);
                 }
             })
     }

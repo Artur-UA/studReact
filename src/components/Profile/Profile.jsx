@@ -42,6 +42,7 @@ const Profile = (state) => {
                 <div>
                     <div>
                         <img src={state.profileData.photos.large || 'https://socialvk.ru/wp-content/uploads/avatarka-pustaya-vk_23.jpg'} alt='текст'/>
+                        <span>{state.profileData.userId}-{state.profileData.fullName}</span>
                         <Status status={state.status} updateStatus={state.updateStatusThunkCreator}/>
                         <br/>
                         {state.status}<br/>

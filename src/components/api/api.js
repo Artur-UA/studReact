@@ -59,8 +59,8 @@ export const API_Auth = () => {
 }
 
 export const API_Login = {
-    login(email, password) {
-        return instanceAPI.post('/auth/login', {email: email, password: password})
+    login(email, password, rememberMe = false) {
+        return instanceAPI.post('/auth/login', {email: email, password: password, rememberMe: rememberMe})
     },
     logout() {
         return instanceAPI.delete('/auth/login')

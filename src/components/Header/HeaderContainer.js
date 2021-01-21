@@ -2,13 +2,12 @@ import React from 'react';
 import Header from './Header'
 import {connect} from 'react-redux'
 //import axios from 'axios'
-import {authReducerAC, authThunkCreator} from '../Redux/authReducer'
-import {API_Auth} from '../api/api'
+import {authReducerAC, logoutThunkCreator} from '../Redux/authReducer'
 
 class HeaderContainer extends React.Component {
 
-    componentDidMount() {
-        /* axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+    /* componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
             withCredentials: true  //это нужно для передачи куков
         }) */
         /* API_Auth()
@@ -18,9 +17,9 @@ class HeaderContainer extends React.Component {
                 this.props.authReducerAC(id, login, email);
             }
         })
- */
-        this.props.authThunkCreator(API_Auth)
-    }
+ 
+        this.props.authThunkCreator()
+    }*/
 
     render() {
         return (
@@ -45,4 +44,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }  */
 
-export default connect (mapStateToProps, {authReducerAC, authThunkCreator}) (HeaderContainer)
+export default connect (mapStateToProps, {authReducerAC, logoutThunkCreator}) (HeaderContainer)
