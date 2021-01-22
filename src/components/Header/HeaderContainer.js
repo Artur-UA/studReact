@@ -4,6 +4,8 @@ import {connect} from 'react-redux'
 //import axios from 'axios'
 import {authReducerAC, logoutThunkCreator} from '../Redux/authReducer'
 
+import {getId, getLogin, getEmail} from '../Redux/usersSelector'
+
 class HeaderContainer extends React.Component {
 
     /* componentDidMount() {
@@ -30,9 +32,9 @@ class HeaderContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return{
-        id:state.auth.id,
-        login:state.auth.login,
-        email:state.auth.email
+        id : getId(state),
+        login : getLogin(state),
+        email : getEmail(state)
     }
 }
 /* 

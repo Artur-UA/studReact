@@ -6,6 +6,7 @@ import UsersCom from './UsersCom'
 //import * as axios from 'axios'
 import {API} from '../api/api'
 //import {withAuthRedirect} from '../hoc/withAuthRedirect'
+import {getInfo, getTotalUsers, getUsersInPage, getNumberPage, getIsPreloader, getFollowingInProgress} from '../Redux/usersSelector'
 
 class Users extends Component {
     
@@ -54,7 +55,7 @@ class Users extends Component {
 
 //let withLoginRedirect = withAuthRedirect(Users)
 
-let mapStateToProps = (state) => {
+/* let mapStateToProps = (state) => {
     return {
         info: state.usersPage.dataFriend,
         totalUsers: state.usersPage.totalUsers,
@@ -62,6 +63,17 @@ let mapStateToProps = (state) => {
         numberPage: state.usersPage.numberPage,
         isPreloader: state.usersPage.isPreloader,
         followingInProgress : state.usersPage.followingInProgress
+    }
+} */
+
+let mapStateToProps = (state) => {
+    return {
+        info: getInfo(state),
+        totalUsers: getTotalUsers(state),
+        usersInPage: getUsersInPage(state),
+        numberPage: getNumberPage(state),
+        isPreloader: getIsPreloader(state),
+        followingInProgress : getFollowingInProgress(state)
     }
 }
 
