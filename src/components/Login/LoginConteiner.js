@@ -6,6 +6,7 @@ import { maxLengthCreator, required } from '../validate/validate'
 import { Input } from '../validate/textArea/FormControl'
 import {Redirect} from 'react-router-dom'
 import '../validate/textArea/FormControl.css'
+import {getAuth} from '../Redux/usersSelector'
 
 const maxLength = maxLengthCreator(20)
 
@@ -69,9 +70,14 @@ const LoginConteinerTest = (props) => {
     }
 
 
-let mapStateToProps = (state) => {
+/* let mapStateToProps = (state) => {
     return {
         auth: state.auth.inAuth
+    }
+} */
+const mapStateToProps = (state) => {
+    return {
+        auth: getAuth(state)
     }
 }
 

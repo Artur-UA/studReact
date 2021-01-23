@@ -3,6 +3,7 @@
 import {addPostActionCreator, newTextActionCreator, newTextReduxFormActionCreator} from '../Redux/navbarReducer'
 import Friends from './friends';
 import {connect} from 'react-redux'
+import {getDatatFriends, getTextFriends} from '../Redux/usersSelector'
 
 /* const FriendsContainer = (props) => {
  *//*     let data = props.data.navbarPage.friends;
@@ -42,8 +43,8 @@ export default FriendsContainer; */
 
 let mapStateToProps = (state) => {
     return {
-        data: state.navbarPage.friends,
-        dataValue: state.navbarPage.texts
+        data: getDatatFriends(state),
+        dataValue: getTextFriends(state)
     }
 }
 

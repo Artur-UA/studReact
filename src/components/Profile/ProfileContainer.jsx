@@ -8,6 +8,7 @@ import {/* Redirect, */  withRouter} from 'react-router-dom'
 import {API_Profile} from '../api/api'
 import {withAuthRedirect} from '../hoc/withAuthRedirect'
 import { compose } from 'redux';
+import {getProfileValue, getProfileMessage, getProfileData, getProfileStatus, getAuth, getId} from '../Redux/usersSelector'
 
 /* const ProfileContainer = () => {
     /* const messages = state.state.profilePage.message;
@@ -82,12 +83,12 @@ class ProfileSetContainer extends Component {
 
 let mapStateToProps = (state) => {
         return{
-            messagesValue: state.profilePage.textBeforePost,
-            messages: state.profilePage.message,
-            profileData: state.profilePage.profileData,
-            auth: state.auth.inAuth,
-            status: state.profilePage.status,
-            id: state.auth.id
+            messagesValue: getProfileValue(state),
+            messages: getProfileMessage(state),
+            profileData: getProfileData(state),
+            auth: getAuth(state),
+            status: getProfileStatus(state),
+            id: getId(state)
         }
     }
 

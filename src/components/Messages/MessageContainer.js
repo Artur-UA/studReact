@@ -4,6 +4,7 @@ import { dialogTextActionCreator, dialogTextSendActionCreator, dialogTextSendRed
 import Messages from './Message'
 import {connect} from 'react-redux'
 import {withAuthRedirect} from '../hoc/withAuthRedirect'
+import {getValueMessage, getItemMessage, getDialogsMessage} from '../Redux/usersSelector'
 
 /* const MessagesContainer = () => { */
 
@@ -37,11 +38,20 @@ import {withAuthRedirect} from '../hoc/withAuthRedirect'
     )
 } */
 
-let mapStateToProps = (state) => {
+/* let mapStateToProps = (state) => {
     return{
         value: state.messagePage.textTest,
         item: state.messagePage.people,
         mes:state.messagePage.dialogs,
+        /* auth: state.auth.inAuth */
+   /*  }
+}  */
+
+let mapStateToProps = (state) => {
+    return{
+        value: getValueMessage(state),
+        item: getItemMessage(state),
+        mes: getDialogsMessage(state),
         /* auth: state.auth.inAuth */
     }
 }

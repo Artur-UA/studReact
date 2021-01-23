@@ -36,3 +36,44 @@ export const getLogin = (state) => {
 export const getEmail = (state) => {
     return state.auth.email
 }
+
+/* LoginContainer */
+
+export const getAuth = (state) => {
+    return state.auth.inAuth
+}
+
+/* MessageContainer */
+export const getValueMessage = (state) => {
+    return state.messagePage.textTest
+}
+export const getItemMessage = (state) => {
+    return state.messagePage.people
+}
+export const getDialogsMessage = (state) => {
+    return state.messagePage.dialogs
+}
+
+/* NavbarFriendsContainer */
+
+export const getDatatFriends = (state) => {
+    return state.navbarPage.friends
+}
+export const getTextFriends = (state) => {
+    return state.navbarPage.texts
+}
+
+/* ProfileContainer */
+
+export const getProfileValue = (state) => {
+    return state.profilePage.textBeforePost
+}
+export const getProfileMessage = (state) => {
+    return state.profilePage.message
+}
+export const getProfileData = (state) => {
+    return state.profilePage.profileData
+}
+export const getProfileStatus = (state) => {
+    return state.profilePage.status
+}
