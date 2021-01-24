@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React,{/* Component */ useEffect} from 'react'
 import {connect} from 'react-redux'
 //import Users from './UsersClass'
 import {friendshipAC, addFriendAC, newListAC, allPageAC, toogleIsPreloaderAC, followingInProgressAC, followThunkCreator, getAllUsersThunkCreator, getNewUsersThunkCreator} from '../Redux/usersReducer'
@@ -8,11 +8,11 @@ import {API} from '../api/api'
 //import {withAuthRedirect} from '../hoc/withAuthRedirect'
 import {getInfo, getTotalUsers, getUsersInPage, getNumberPage, getIsPreloader, getFollowingInProgress} from '../Redux/usersSelector'
 
-class Users extends Component {
+/* class Users extends Component {
     
-    componentDidMount() {
+    componentDidMount() { */
         
-        
+        /* Старый код */
         /* axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.numberPage}&count=${this.props.usersInPage}`, {
             withCredentials: true
         }) */
@@ -25,12 +25,14 @@ class Users extends Component {
             this.props.toogleIsPreloaderAC(false) 
         })*/
 
+        /* Новый код 
               this.props.getAllUsersThunkCreator(API, this.props.numberPage, this.props.usersInPage)  
-        
-    };
+   };*/
 
-    newPage = (pop) => {
+/* Новый код */
+//    newPage = (pop) => { 
 
+        /* Старый код */
         /* axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pop}&count=${this.props.usersInPage}`, {
             withCredentials: true
         }) */
@@ -41,7 +43,8 @@ class Users extends Component {
                 this.props.toogleIsPreloaderAC(false)
             }) */
 
-            this.props.getNewUsersThunkCreator(API, pop, this.props.usersInPage) 
+            /* Новый код */
+            /* this.props.getNewUsersThunkCreator(API, pop, this.props.usersInPage) 
     }
 
 
@@ -51,7 +54,25 @@ class Users extends Component {
          followingInProgress={this.props.followingInProgress} followingInProgressAC={this.props.followingInProgressAC}
          followThunkCreator={this.props.followThunkCreator} />
         }
+    } */
+
+const Users = ( props) => {
+    
+    useEffect (() => {
+        props.getAllUsersThunkCreator(API, props.numberPage, props.usersInPage)  
+    }, [] )
+
+    const newPage = (pop) => {
+        props.getNewUsersThunkCreator(API, pop, props.usersInPage) 
     }
+
+    return (
+        <UsersCom totalUsers={props.totalUsers} usersInPage={props.usersInPage} numberPage={props.numberPage} 
+         newPage={newPage} info={props.info} friendshipAC={props.friendshipAC} isPreloader={props.isPreloader} 
+         followingInProgress={props.followingInProgress} followingInProgressAC={props.followingInProgressAC}
+         followThunkCreator={props.followThunkCreator} />
+    )
+}
 
 //let withLoginRedirect = withAuthRedirect(Users)
 

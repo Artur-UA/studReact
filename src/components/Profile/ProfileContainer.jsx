@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {/* Component, */ useEffect} from 'react';
 //import MyContext from '../Redux/context';
 import {profileTextActionCreator, infoUserDataThunkCreator, setNewProfileAC, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator, newProfileFormReduxAC} from '../Redux/profileReducer'
 import Profile from './Profile';
@@ -35,49 +35,76 @@ import {getProfileValue, getProfileMessage, getProfileData, getProfileStatus, ge
 }
 export default ProfileContainer; */
 
-class ProfileSetContainer extends Component {
+/* class ProfileSetContainer1 extends Component {
     
     componentDidMount(){
         let nameId = this.props.match.params.name_id;
 
         if(!nameId) {
-            nameId = this.props.id/* 1055 */
+            nameId = this.props.id
          if (!nameId) {
              this.props.history.push('/login')
-           /*  <Redirect to='/users' /> */
-        }}
+        }} */
 
-        /* axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + nameId) */
-        /* API_Profile.getUsersInfo(nameId)
+        /* переписал на дургой код  axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + nameId) */
+        /* переписал на дургой код API_Profile.getUsersInfo(nameId)
         .then(response => {
             this.props.setNewProfileAC(response.data)
         }) */
         
-        this.props.infoUserDataThunkCreator(API_Profile, nameId)
-
-        /* API_Profile.getUserStatus(nameId)
+/*         this.props.infoUserDataThunkCreator(API_Profile, nameId)
+ */
+        /* переписал на дургой код  API_Profile.getUserStatus(nameId)
             .then(response=> {
                 this.props.getStatusAC(response.data)
             })
          */
-        this.props.getStatusThunkCreator(API_Profile, nameId)
+      /*   this.props.getStatusThunkCreator(API_Profile, nameId)
 
-    }
+    } */
 
-    /* updateStatus() {API_Profile.updateUserStatus(this.props.status)
+    /* переписал на дургой код updateStatus() {API_Profile.updateUserStatus(this.props.status)
             .then(response => {
                 console.log(response)
             })
     } */
 
-    render(){
-       /*  if (!this.props.auth) return <Redirect to={'/login'}/> */
-        return(
+    /* render(){ */
+
+       /*  переписал на дургой код if (!this.props.auth) return <Redirect to={'/login'}/> */
+
+/*         return(
             <Profile {...this.props}/>
         )
     }
     
+} */
+
+const ProfileSetContainer = (props) => {
+
+    console.log('povtor');
+
+    useEffect(() => {
+        let nameId = props.match.params.name_id;
+
+        if(!nameId) {
+            nameId = props.id/* 1055 */
+         if (!nameId) {
+             props.history.push('/login')
+           /*  <Redirect to='/users' /> */
+        }}
+
+        props.infoUserDataThunkCreator(API_Profile, nameId)
+        props.getStatusThunkCreator(API_Profile, nameId)
+    },[props.match.params.name_id] )
+
+
+    return (
+        <Profile {...props}/>
+    )
 }
+
+
 
 /* let withLoginRedirect = withAuthRedirect(ProfileSetContainer) */
 

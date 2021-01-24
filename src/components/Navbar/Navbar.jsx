@@ -5,7 +5,6 @@ import FriendsContainer from './friendsContainer'
 const Navbar = (props) => {
 
 /*     let people = props.friends.map(friend => ) */
-
     return <nav className='nav'>
         <div>
             {/* <a href='/profile'>Profile</a> */}

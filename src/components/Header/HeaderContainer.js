@@ -6,8 +6,8 @@ import {authReducerAC, logoutThunkCreator} from '../Redux/authReducer'
 
 import {getId, getLogin, getEmail} from '../Redux/usersSelector'
 
-class HeaderContainer extends React.Component {
-
+//class HeaderContainer extends React.Component {
+const HeaderContainer = (props) => {
     /* componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
             withCredentials: true  //это нужно для передачи куков
@@ -23,11 +23,11 @@ class HeaderContainer extends React.Component {
         this.props.authThunkCreator()
     }*/
 
-    render() {
+    //render() {
         return (
-            <Header {...this.props} />
+            <Header {...props} />
         )
-    }
+    
 }
 
 const mapStateToProps = (state) => {
