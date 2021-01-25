@@ -82,8 +82,6 @@ export default ProfileContainer; */
 
 const ProfileSetContainer = (props) => {
 
-    console.log('povtor');
-
     useEffect(() => {
         let nameId = props.match.params.name_id;
 

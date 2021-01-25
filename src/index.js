@@ -13,15 +13,13 @@ import {BrowserRouter} from 'react-router-dom';
 /* 
 const renderPage = () => { */
 ReactDOM.render(
-        <Provider store={store}>
-    <BrowserRouter>
-
+    <Provider store={store}>
+        <BrowserRouter>
             <App /* state={state} dispatch={store.dispatch.bind(store)} */ /* addInfo={store.addPost.bind(store)} text={store.newText.bind(store)} profileText1={store.profileText.bind(store)} *//>
-    </BrowserRouter> </Provider>,document.getElementById('root')
-    
-    
-
+        </BrowserRouter> 
+    </Provider>,document.getElementById('root')
     );
+    
     window.store = store;
 /*}
  
