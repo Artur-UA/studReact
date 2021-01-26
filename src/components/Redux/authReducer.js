@@ -24,6 +24,15 @@ const authReducer = (state = initialState, action) => {
 
 export const authReducerAC = (id, login, email, inAuth) => ({type: SET_USER_DATA, payload: {id, login, email, inAuth}})
 
+export const authThunkCreator = () =>  async (dispatch) => {
+        const response = await API_Auth()
+            
+        if(response.data.resultCode === 0 ) {
+            let {id, login, email} = response.data.data;
+            dispatch(authReducerAC(id, login, email, true))
+        }   
+}
+/* копия до рефакторинга
 export const authThunkCreator = () => {
     return (dispatch) => {
         return API_Auth()
@@ -35,36 +44,27 @@ export const authThunkCreator = () => {
             }
         })
     }
-}
+} */
 
-export const loginThunkCreator = (data) => {
-
-    return (dispatch) => {
+export const loginThunkCreator = (data) => async (dispatch) => {
         let {email, password, rememberMe} = data;
-        API_Login.login(email, password, rememberMe)
-            .then(response => {
-                console.log(response);
-                if(response.data.resultCode === 0) {
-                    dispatch(authThunkCreator())
-                } else {
-                    const message = response.data.messages.length > 0 ? response.data.messages : "Wrong Email or Password"
-                    const action = stopSubmit("login", {_error: message}) //stopSubmit это спец метод из redux-form который позволяет показать ошибку, настаиваем его и делаем dispatch. В настройке пишем первым пунктом название формы, вторым name Field которое подсветит красным. _error это значит что-то в форме неправильно 
-                    dispatch(action);
-                }
-            })
-    }
+        const response = await API_Login.login(email, password, rememberMe)
+            if(response.data.resultCode === 0) {
+                dispatch(authThunkCreator())
+            } else {
+                const message = response.data.messages.length > 0 ? response.data.messages : "Wrong Email or Password"
+                const action = stopSubmit("login", {_error: message}) //stopSubmit это спец метод из redux-form который позволяет показать ошибку, настаиваем его и делаем dispatch. В настройке пишем первым пунктом название формы, вторым name Field которое подсветит красным. _error это значит что-то в форме неправильно 
+                dispatch(action);
+            }
 }
 
-export const logoutThunkCreator = () => {
-    return (dispatch) => {
-        API_Login.logout()
-            .then(response => {
-                console.log(response);
-                if(response.data.resultCode === 0) {
-                    dispatch(authReducerAC(null, null, null, false))
-                }
-            })
-    }
+export const logoutThunkCreator = () => async (dispatch) => {
+    const response = await API_Login.logout()
+           
+        console.log(response);
+        if(response.data.resultCode === 0) {
+            dispatch(authReducerAC(null, null, null, false))
+        }
 }
 
 export default authReducer;

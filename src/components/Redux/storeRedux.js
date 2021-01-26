@@ -1,4 +1,4 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux'
+import {createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 
 import navbarReducer from './navbarReducer'
@@ -19,6 +19,10 @@ let reducers = combineReducers({//собираем воедино разбиты
     form: formReducer,
     app: appReducer
 })
-const store = createStore(reducers, applyMiddleware(thunkMiddleware))
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers,  composeEnhancers(applyMiddleware(thunkMiddleware)))
+
+//const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 export default store;

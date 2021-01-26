@@ -1,5 +1,5 @@
 import React from 'react'
-import {Field, reduxForm} from 'redux-form'
+import {/* Field, */ reduxForm} from 'redux-form'
 import {loginThunkCreator, logoutThunkCreator} from '../Redux/authReducer'
 import {connect} from 'react-redux'
 import { maxLengthCreator, required } from '../validate/validate'
@@ -7,6 +7,7 @@ import { Input } from '../validate/textArea/FormControl'
 import {Redirect} from 'react-router-dom'
 import '../validate/textArea/FormControl.css'
 import {getAuth} from '../Redux/usersSelector'
+import createField from '../validate/field/createField'
 
 const maxLength = maxLengthCreator(20)
 
@@ -17,7 +18,7 @@ const LoginForm = (props) => {
         <>
             <div>LoginForm</div>
             <form onSubmit={props.handleSubmit}> {/* что будет при нажатии отправки, запустит функцию handleSubmit*/}
-                <div>
+{/*                 <div>
                     <Field placeholder='Email' name="email" component={Input}
                             validate={[required, maxLength]}/>
                 </div>
@@ -27,7 +28,11 @@ const LoginForm = (props) => {
                 </div>
                 <div>
                     <Field type='checkbox' name="rememberMe" component='input' /> remember me
-                </div>
+                </div> */}
+
+                {createField("Email", "email", Input, [required, maxLength], '' ,'')}
+                {createField('Password', 'password', Input, [required, maxLength], 'password', '')}
+                {createField('', 'rememberMe', 'input', [], 'checkbox', 'remember me.')}
 
                 { props.error && <div className='errorLogin'> 
                     {props.error}

@@ -3,9 +3,10 @@ import './Profice.css'
 import {NavLink/* , Redirect */} from 'react-router-dom'
 //import {ItemMess} from './DialogsItem';
 //import {dialogTextActionCreator, dialogTextSendActionCreator} from '../Redux/messageReducer'
-import {Field, reduxForm} from 'redux-form'
+import {/* Field, */ reduxForm} from 'redux-form'
 import {maxLengthCreator, required} from '../validate/validate'
 import {Textarea} from '../validate/textArea/FormControl'
+import createField from '../validate/field/createField'
 
 const Messages = (props) => {
     /* let item = props.info.messagePage.people;
@@ -109,7 +110,8 @@ const MessageForm = (props) => {
     return(
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name='message' component={Textarea}  placeholder='Напишите свое сообщение' validate={[required, maxLength]} />        
+                {/* <Field name='message' component={Textarea}  placeholder='Напишите свое сообщение' validate={[required, maxLength]} />     */}  
+                {createField('Напишите свое сообщение', 'message', Textarea, [required, maxLength])}  
             </div>
             <div>
                 <button >Click</button>

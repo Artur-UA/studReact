@@ -60,6 +60,7 @@ export const setNewProfileAC = (profileData) => ({type: SET_NEW_PROFILE, profile
 export const getStatusAC = (info) => ({type: GET_STATUS, status: info})
 export const newProfileFormReduxAC = (profile) => ({type: NEW_PROFILE_REDUX_FORM, profile})
 
+/* копия до рефакторинга
 export const infoUserDataThunkCreator = (API_Profile, nameId) => {
     return (dispatch) => {
         API_Profile.getUsersInfo(nameId)
@@ -67,26 +68,23 @@ export const infoUserDataThunkCreator = (API_Profile, nameId) => {
             dispatch(setNewProfileAC(response.data))
         })
     }
+} */
+
+export const infoUserDataThunkCreator = (API_Profile, nameId) => async (dispatch) => {
+        const response = await API_Profile.getUsersInfo(nameId)
+            dispatch(setNewProfileAC(response.data))
 }
 
-export const getStatusThunkCreator = (API_Profile, nameId) => {
-    return (dispatch) => {
-        API_Profile.getUserStatus(nameId)
-            .then(response=> {
+export const getStatusThunkCreator = (API_Profile, nameId) => async (dispatch) => {
+        const response = await API_Profile.getUserStatus(nameId)
                 dispatch(getStatusAC(response.data))
-            })
-    }
 }
 
-export const updateStatusThunkCreator = (status) => {
-    return (dispatch) => { 
-        API_Profile.updateUserStatus(status)
-            .then(response => {
+export const updateStatusThunkCreator = (status) => async (dispatch) => { 
+        const response = await API_Profile.updateUserStatus(status)
                 if (response.data.resultCode === 0) {
                     dispatch(getStatusAC(status))
                 }
-            })
-    }
 }
 
 export default profileReducer;

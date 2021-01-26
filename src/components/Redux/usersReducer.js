@@ -55,6 +55,7 @@ export const toogleIsPreloaderAC = (boolean) => ({ type: TOOGLE_IS_PRELOADER, bo
 export const followingInProgressAC = (boolean) => ({ type: FOLLOWING_IN_PROGRESS, boolean })
 
 
+
 export const followThunkCreator = (API, info) => {
     return (dispatch) => {
         dispatch(followingInProgressAC(true));
@@ -73,6 +74,7 @@ export const followThunkCreator = (API, info) => {
     }
 } */
 
+/* копия до рефакторинга
 export const getAllUsersThunkCreator = (API, numberPage, usersInPage) => {
     return (dispatch) => {
         dispatch(toogleIsPreloaderAC(true)) 
@@ -84,17 +86,22 @@ export const getAllUsersThunkCreator = (API, numberPage, usersInPage) => {
        
         })
     }
+} */
+
+export const getAllUsersThunkCreator = (API, numberPage, usersInPage) => async (dispatch) => {
+        dispatch(toogleIsPreloaderAC(true)) 
+        const data = await API.getUsers(numberPage, usersInPage)
+        dispatch(addFriendAC(data.items))
+        dispatch(allPageAC(data.totalCount))
+        dispatch(toogleIsPreloaderAC(false))
 } 
 
-export const getNewUsersThunkCreator = (API, pop, usersInPage) => {
-    return (dispatch) => {
+export const getNewUsersThunkCreator = (API, pop, usersInPage) => async (dispatch) => {
         dispatch(toogleIsPreloaderAC(true)) 
-        API.getUsers(pop, usersInPage)
-                .then(response => {
-                dispatch(newListAC(response, pop));
-            })
+        const response = await API.getUsers(pop, usersInPage)
+            dispatch(newListAC(response, pop));
             dispatch(toogleIsPreloaderAC(false))
-    }
+    
 }
 
 export default usersReducer;

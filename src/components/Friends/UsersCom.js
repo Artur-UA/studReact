@@ -29,7 +29,7 @@ const UsersCom = (props) => {
                         <div>{i.name}</div><span>{i.followed}</span>
                         <div>{i.id}</div>
                         {/* <div><strong>i.location.city</strong>i.location.country</div>  */}
-                            <NavLink to={`/profile/${i.id}`}>
+                            <NavLink key={i.id}to={`/profile/${i.id}`}>
                                 <img src={i.photos.small || "https://ihde.tsu.ru/wp-content/uploads/2017/10/no-ava-300x300.png"} alt="Ель-Шевченко"/>
                             </NavLink>
                         <div>
