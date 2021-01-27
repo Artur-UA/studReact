@@ -2,3 +2,57 @@
     font-size: larger;
     color: aqua;
 }
+
+
+
+.pageNumber{
+    padding: 2px;
+    border: solid 1px black
+}
+
+.selectedPage {
+    font-weight: bold;
+    color: teal;
+    border: solid 4px rebeccapurple
+}
+
+
+
+.paginationWrapper {
+    text-align: center;
+    margin: 40px 0;
+  }
+  
+.pagination {
+	display: inline-block;
+	height: 70px;
+	margin-top: 70px;
+	padding: 0 25px;
+	border-radius: 35px;
+    background-color: #d3d3d3 ;
+}
+
+
+
+.pageNumbers {
+    text-decoration: none;
+    display: block;
+    padding: 0 25px;
+    float: left;
+    transition: duration easing;
+    color: grey;
+    font-size: 20px;
+    letter-spacing: 0.1em;
+    line-height: 70px;
+}
+.current {
+        background-color: green;
+        color: white;
+}
+.prev, 
+.next {
+    color: green;
+    outline: none;
+    border: none;
+    background-color: #d3d3d3;
+    }

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Users.css';
 import Preloader from '../preloader/preloader'
 import { NavLink } from 'react-router-dom';
 //import axios from 'axios'
 import {API} from '../api/api'
+import cn from 'classnames'
 
 const UsersCom = (props) => {
     
@@ -13,17 +14,43 @@ const UsersCom = (props) => {
     for( let i = 1; i <= pagesCount; i++) {
         pages.push(i) 
         }
+
+    const positionCount = Math.ceil(pagesCount / 10); //это величина, на которую можно максиимум изменить positionNumber
+    const [positionNumber, changeNumber] = useState(1) //обработчик откуда стартует и функция изменения state 
+    const leftPositionNumber = (positionNumber - 1) * 10 + 1;
+    const rightPositionNumber = positionNumber * 10;
+
     return (
         <>
             {props.isPreloader? <Preloader/> : undefined}
-            <div>
-                {pages.map(pop => { 
-                    return  <span key={pop} className={props.numberPage === pop ? 'activePage': undefined}
-                        onClick={ (e) => {props.newPage(pop)}}
-                        >{pop}</span>
-                    
-                })}
+            
+            <div className={"paginationWrapper"}>
+                <div className={"pagination"}>
+                    {positionNumber > 1 && <button className={`${"pageNumbers"} ${"prev"}`} onClick={() => {changeNumber(positionNumber -1)}}>Назад</button>}
 
+
+                    {pages
+                        .filter(pop => pop >= leftPositionNumber && pop <= rightPositionNumber)
+                        .map((pop) => { 
+                        return  <span  /* className={props.numberCount === pop ? 'activePage': "selectedPage"} */
+                            className={cn(props.numberPage === pop ? `${"current"} ${"pageNumbers"}` :"pageNumbers")}
+                                        onClick={ (e) => {props.newPage(pop)}}
+                                        key={pop}
+                            >{pop}</span>
+                        }
+                        )}
+
+                    {/* {pages.map(pop => { 
+                        return  <span key={pop} className={props.numberPage === pop ? 'activePage': undefined}
+                            onClick={ (e) => {props.newPage(pop)}}
+                            >{pop}</span>
+                        
+                    })} */}
+
+                    {positionCount > positionNumber && 
+                        <button className={`${"pageNumbers"} ${"next"}`} onClick={() => {changeNumber(positionNumber + 1)}}>Вперед</button>}
+                </div>
+                    
                 { props.info.map( i => <div key={i.id} >
                         
                         <div>{i.name}</div><span>{i.followed}</span>
