@@ -60,7 +60,7 @@ const Users = ( props) => {
     
     useEffect (() => {
         props.getAllUsersThunkCreator(API, props.numberPage, props.usersInPage)  
-    }, [] )
+    }, [props.usersInPage] )
 
     const newPage = (pop) => {
         props.getNewUsersThunkCreator(API, pop, props.usersInPage) 

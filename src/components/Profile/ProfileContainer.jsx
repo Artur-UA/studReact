@@ -1,4 +1,4 @@
-import React, {/* Component, */ useEffect} from 'react';
+import React, {/* Component, */ useEffect, useRef} from 'react';
 //import MyContext from '../Redux/context';
 import {profileTextActionCreator, infoUserDataThunkCreator, setNewProfileAC, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator, newProfileFormReduxAC} from '../Redux/profileReducer'
 import Profile from './Profile';
@@ -81,12 +81,15 @@ export default ProfileContainer; */
 } */
 
 const ProfileSetContainer = (props) => {
+    let nameId = props.match.params.name_id;
+
+    const propsId = useRef(props)
 
     useEffect(() => {
-        let nameId = props.match.params.name_id;
-
+        
+        
         if(!nameId) {
-            nameId = props.id/* 1055 */
+            nameId = propsId.current;/* 1055 */
          if (!nameId) {
              props.history.push('/login')
            /*  <Redirect to='/users' /> */

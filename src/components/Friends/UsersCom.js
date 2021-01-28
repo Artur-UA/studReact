@@ -13,7 +13,7 @@ const UsersCom = (props) => {
     let pages = [];
     for( let i = 1; i <= pagesCount; i++) {
         pages.push(i) 
-        }
+    }
 
     const positionCount = Math.ceil(pagesCount / 10); //это величина, на которую можно максиимум изменить positionNumber
     const [positionNumber, changeNumber] = useState(1) //обработчик откуда стартует и функция изменения state 

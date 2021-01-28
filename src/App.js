@@ -5,13 +5,16 @@ import Navbar from './components/Navbar/Navbar';
 //import Profile from './components/Profile/Profile';
 //import Messages from './components/Messages/Message'
 import {Route} from 'react-router-dom'
-import MessagesContainer from './components/Messages/MessageContainer';
+//import MessagesContainer from './components/Messages/MessageContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Friends/UsersContainer';
 import LoginContainer from './components/Login/LoginConteiner'
 import { connect } from 'react-redux';
 import {initialThunkCreator} from './components/Redux/appReducer'
 import Preloader from './components/preloader/preloader'
+
+const MessagesContainer = React.lazy(() => import('./components/Messages/MessageContainer'));
+
 
 class App extends React.Component {
 
@@ -38,7 +41,14 @@ class App extends React.Component {
                                                                 dispatch={props.dispatch}
                                                                 profileText2={props.profileText1}/> */}/>
 
-                    <Route path='/message' render={()=> <MessagesContainer /* state={props.state} dispatch={props.dispatch} *//>
+                    <Route path='/message' render={()=> 
+                                
+                        <React.Suspense fallback={<Preloader />}>
+                            <MessagesContainer />
+                        </React.Suspense>
+                                                      //<MessagesContainer /* state={props.state} dispatch={props.dispatch} *//>
+                    
+                    //<MessagesContainer /* state={props.state} dispatch={props.dispatch} *//>
                                                         /*<Messages info={props.state} 
                                                                     message={props.state.profilePage} 
                                                                 img={props.state.profilePage}  
