@@ -25,11 +25,16 @@ const Profile = (state) => {
         state.profileTextActionCreator(text) 
     }
 
+    const onMainPhotoSelected = (e) => {
+        if (e.target.files.length) {
+            state.sendPhotoThunkCreator(e.target.files[0])
+        }
+    }
+
     const addNewProfileMessage = (data) => {
         console.log(data.profile)
         state.newProfileFormReduxAC(data.profile)
     } 
-
         if(!state.profileData) {
             return <Preloader/>
         }
@@ -44,6 +49,21 @@ const Profile = (state) => {
                 <div>
                     <div>
                         <img src={state.profileData.photos.large || 'https://socialvk.ru/wp-content/uploads/avatarka-pustaya-vk_23.jpg'} alt='текст'/>
+
+                        {/* { state.location.pathname === '/profile' ? <button>Change photo</button> : undefined} */}
+                        { state.isOwner ? <input type="file" onChange={onMainPhotoSelected} /> : undefined}
+
+
+
+
+
+
+
+
+
+
+
+
                         <span>{state.profileData.userId}-{state.profileData.fullName}</span>
                         {/* <Status status={state.status} updateStatus={state.updateStatusThunkCreator}/> */}
                         <StatusHooks status={state.status} updateStatus={state.updateStatusThunkCreator}/>

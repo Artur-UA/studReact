@@ -5,7 +5,7 @@ export const SET_NEW_PROFILE = 'SET_NEW_PROFILE';
 export const GET_STATUS = 'GET_STATUS'
 export const UPDATE_STATUS = 'UPDATE_STATUS'
 export const NEW_PROFILE_REDUX_FORM = 'NEW_PROFILE_REDUX_FORM'
-
+export const SEND_PHOTO_SUCCESS = 'SEND_PHOTO_SUCCESS'
 
 const initialState = {
     message:[
@@ -50,6 +50,12 @@ const profileReducer = (state = initialState, action) => {
                 message: [...state.message, {id: state.message.length + 1, name: action.profile, like: 38}]
             }
         }
+        case SEND_PHOTO_SUCCESS: {
+            return {
+                ...state , 
+                profileData : {...state.profileData, photos: action.file } 
+            }
+        }
         default:
             return state;
     }
@@ -59,6 +65,7 @@ export const profileTextActionCreator = (text) => ({type:PROFILE_TEXT, textInfo:
 export const setNewProfileAC = (profileData) => ({type: SET_NEW_PROFILE, profileData})
 export const getStatusAC = (info) => ({type: GET_STATUS, status: info})
 export const newProfileFormReduxAC = (profile) => ({type: NEW_PROFILE_REDUX_FORM, profile})
+export const sendPhotoAC = (file) => ({ type: SEND_PHOTO_SUCCESS, file})
 
 /* копия до рефакторинга
 export const infoUserDataThunkCreator = (API_Profile, nameId) => {
@@ -85,6 +92,13 @@ export const updateStatusThunkCreator = (status) => async (dispatch) => {
                 if (response.data.resultCode === 0) {
                     dispatch(getStatusAC(status))
                 }
+}
+
+export const sendPhotoThunkCreator = (file) => async (dispatch) => {
+    const response = await API_Profile.sendPhoto(file)
+        if(response.data.resultCode === 0) {
+            dispatch(sendPhotoAC(response.data.data.photos))
+        }
 }
 
 export default profileReducer;

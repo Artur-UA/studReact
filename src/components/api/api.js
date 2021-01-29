@@ -42,6 +42,8 @@ export const API = {
         return instanceAPI.post(`follow/${id}`)
     }
 }
+
+
 export const API_Profile = {
     getUsersInfo (idUsers) {
         return instanceAPI.get('profile/' + idUsers)
@@ -51,6 +53,9 @@ export const API_Profile = {
     },
     updateUserStatus(status) {
         return instanceAPI.put('profile/status', {status: status})
+    },
+    sendPhoto(file) {
+        return instanceAPI.put('/profile/photo', {image: file})
     }
 }
 

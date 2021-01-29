@@ -1,6 +1,6 @@
-import React, {/* Component, */ useEffect, useRef} from 'react';
+import React, {/* Component, */ useEffect/* , useRef */} from 'react';
 //import MyContext from '../Redux/context';
-import {profileTextActionCreator, infoUserDataThunkCreator, setNewProfileAC, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator, newProfileFormReduxAC} from '../Redux/profileReducer'
+import {profileTextActionCreator, infoUserDataThunkCreator, setNewProfileAC, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator, newProfileFormReduxAC, sendPhotoThunkCreator} from '../Redux/profileReducer'
 import Profile from './Profile';
 import {connect} from 'react-redux'
 //import axios from 'axios';
@@ -82,14 +82,13 @@ export default ProfileContainer; */
 
 const ProfileSetContainer = (props) => {
     let nameId = props.match.params.name_id;
-
-    const propsId = useRef(props)
+    //const propsId = useRef(props)
 
     useEffect(() => {
         
         
         if(!nameId) {
-            nameId = propsId.current;/* 1055 */
+            nameId = props.id;/* 1055 */
          if (!nameId) {
              props.history.push('/login')
            /*  <Redirect to='/users' /> */
@@ -101,7 +100,7 @@ const ProfileSetContainer = (props) => {
 
 
     return (
-        <Profile {...props}/>
+        <Profile {...props} isOwner={!props.match.params.name_id}/>
     )
 }
 
@@ -139,7 +138,7 @@ let mapStateToProps = (state) => {
 export default ProfileContainer; */
 
 export default compose(
-    connect(mapStateToProps, {profileTextActionCreator, setNewProfileAC, infoUserDataThunkCreator, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator, newProfileFormReduxAC}),
+    connect(mapStateToProps, {profileTextActionCreator, setNewProfileAC, infoUserDataThunkCreator, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator, newProfileFormReduxAC, sendPhotoThunkCreator}),
     withRouter,
     withAuthRedirect 
 )
