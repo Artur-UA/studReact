@@ -77,7 +77,7 @@ export const infoUserDataThunkCreator = (API_Profile, nameId) => {
     }
 } */
 
-export const infoUserDataThunkCreator = (API_Profile, nameId) => async (dispatch) => {
+export const infoUserDataThunkCreator = (nameId) => async (dispatch) => {
         const response = await API_Profile.getUsersInfo(nameId)
             dispatch(setNewProfileAC(response.data))
 }
@@ -98,6 +98,14 @@ export const sendPhotoThunkCreator = (file) => async (dispatch) => {
     const response = await API_Profile.sendPhoto(file)
         if(response.data.resultCode === 0) {
             dispatch(sendPhotoAC(response.data.data.photos))
+        }
+}
+
+export const sendFormDataThunkCreator = (data) => async(dispatch, getState) => { //тут можно не только dispatch но и еще взять state 
+    const response = await API_Profile.sendPersonForm(data)
+    console.log(response);
+        if(response.data.resultCode === 0) {
+            dispatch(infoUserDataThunkCreator(getState().auth.id))
         }
 }
 

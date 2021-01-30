@@ -1,6 +1,6 @@
 import React, {/* Component, */ useEffect/* , useRef */} from 'react';
 //import MyContext from '../Redux/context';
-import {profileTextActionCreator, infoUserDataThunkCreator, setNewProfileAC, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator, newProfileFormReduxAC, sendPhotoThunkCreator} from '../Redux/profileReducer'
+import {profileTextActionCreator, infoUserDataThunkCreator, setNewProfileAC, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator, newProfileFormReduxAC, sendPhotoThunkCreator, sendFormDataThunkCreator} from '../Redux/profileReducer'
 import Profile from './Profile';
 import {connect} from 'react-redux'
 //import axios from 'axios';
@@ -94,7 +94,7 @@ const ProfileSetContainer = (props) => {
            /*  <Redirect to='/users' /> */
         }}
 
-        props.infoUserDataThunkCreator(API_Profile, nameId)
+        props.infoUserDataThunkCreator(nameId)
         props.getStatusThunkCreator(API_Profile, nameId)
     },[props.match.params.name_id] )
 
@@ -138,7 +138,7 @@ let mapStateToProps = (state) => {
 export default ProfileContainer; */
 
 export default compose(
-    connect(mapStateToProps, {profileTextActionCreator, setNewProfileAC, infoUserDataThunkCreator, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator, newProfileFormReduxAC, sendPhotoThunkCreator}),
+    connect(mapStateToProps, {profileTextActionCreator, setNewProfileAC, infoUserDataThunkCreator, getStatusAC, getStatusThunkCreator, updateStatusThunkCreator, newProfileFormReduxAC, sendPhotoThunkCreator, sendFormDataThunkCreator}),
     withRouter,
     withAuthRedirect 
 )

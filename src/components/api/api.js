@@ -55,7 +55,12 @@ export const API_Profile = {
         return instanceAPI.put('profile/status', {status: status})
     },
     sendPhoto(file) {
-        return instanceAPI.put('/profile/photo', {image: file})
+        let formData = new FormData();
+        formData.append('image', file)
+        return instanceAPI.put('/profile/photo', formData)
+    },
+    sendPersonForm(data) {
+        return instanceAPI.put("/profile", data)
     }
 }
 

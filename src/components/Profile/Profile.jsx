@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Post from './Post/Post'
 import Preloader from '../preloader/preloader'
 //import Dialogs from '../Message/Dialogs/Dialogs'
@@ -9,12 +9,15 @@ import {/* Field, */ reduxForm} from 'redux-form'
 import { maxLengthCreator, required} from '../validate/validate';
 import { Textarea } from '../validate/textArea/FormControl';
 import createField from '../validate/field/createField'
+import ProfileInfo from './ProfileInfo';
+import ProfileEdit from './ProfileEdit'
 
 const Profile = (state) => {
     console.log(state);
     /* const messages = state.message.profilePage.message; */
     const mess = state.messages.map(message => <Post key={message.id} name={message.name} like={message.like} />)
 
+    const [isEditMode, changeEditMode] = useState(false)
     let newElement = React.createRef();
     
     let textSend = () => {
@@ -23,6 +26,12 @@ const Profile = (state) => {
         /* state.dispatch({type:'PROFILE_TEXT', textInfo:text}) 
         state.dispatch(profileTextActionCreator(text)) */
         state.profileTextActionCreator(text) 
+    }
+
+    const sendForm = (form) => {
+        console.log(form);
+        state.sendFormDataThunkCreator(form)
+        changeEditMode(false)
     }
 
     const onMainPhotoSelected = (e) => {
@@ -54,22 +63,16 @@ const Profile = (state) => {
                         { state.isOwner ? <input type="file" onChange={onMainPhotoSelected} /> : undefined}
 
 
-
-
-
-
-
-
-
-
-
-
                         <span>{state.profileData.userId}-{state.profileData.fullName}</span>
                         {/* <Status status={state.status} updateStatus={state.updateStatusThunkCreator}/> */}
                         <StatusHooks status={state.status} updateStatus={state.updateStatusThunkCreator}/>
-                        <br/>
-                        {state.status}<br/>
-                        {state.profileData.aboutMe}
+                        <br/><b>Status: </b>{state.status}<br/>
+                        {/* {state.profileData.aboutMe} */}
+                        
+                        { isEditMode  
+                                ? <ProfileEdit onSubmit={sendForm} initialValues={state.profileData} /> //initialValues это свойство reduxform которая раскинет после отправки данные из state в reduxFrom. Тоесть будет происходить обмен информацией между reduxFrom и redux 
+                                : <ProfileInfo data={state.profileData} changeEditMode={() => changeEditMode(true)} isOwner={state.isOwner}/>} 
+
                         <ul>
                             <li>Facebook : {state.profileData.contacts.facebook}</li>
                             <li>Twitter : {state.profileData.contacts.twitter}</li>
