@@ -69,10 +69,14 @@ export const API_Auth = () => {
 }
 
 export const API_Login = {
-    login(email, password, rememberMe = false) {
-        return instanceAPI.post('/auth/login', {email: email, password: password, rememberMe: rememberMe})
+    
+    login(email, password, rememberMe = false, captcha = null) {
+        return instanceAPI.post('/auth/login', {email: email, password: password, rememberMe, captcha})
     },
     logout() {
         return instanceAPI.delete('/auth/login')
+    },
+    captcha() {
+        return instanceAPI.get('/security/get-captcha-url')
     }
 }

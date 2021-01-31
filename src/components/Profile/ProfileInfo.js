@@ -25,6 +25,7 @@ const ProfileInfo = (props) => {
                 <b>Contacts: </b>{ Object.keys(props.data.contacts).map(key => {
                     return <Contact key={key} contactTitle={key} contactValue={props.data.contacts[key]}/>
                 })}
+
             </div>
         </>
     )
@@ -33,5 +34,5 @@ const ProfileInfo = (props) => {
 export default ProfileInfo;
 
 const Contact = ({contactTitle, contactValue}) => {
-    return <div className='site'><b>{contactTitle}: </b> {contactValue} </div>
+    return <div className='site'><b>{contactTitle}: {contactValue} </b> </div>
 } 

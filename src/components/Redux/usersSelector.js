@@ -42,6 +42,9 @@ export const getEmail = (state) => {
 export const getAuth = (state) => {
     return state.auth.inAuth
 }
+export const getCaptcha = (state) => {
+    return state.auth.captcha
+}
 
 /* MessageContainer */
 export const getValueMessage = (state) => {
@@ -77,3 +80,5 @@ export const getProfileData = (state) => {
 export const getProfileStatus = (state) => {
     return state.profilePage.status
 }
+
+

@@ -1,4 +1,5 @@
 import {API_Profile} from '../api/api'
+import {stopSubmit} from 'redux-form'
 
 export const PROFILE_TEXT = 'PROFILE_TEXT';
 export const SET_NEW_PROFILE = 'SET_NEW_PROFILE';
@@ -106,6 +107,11 @@ export const sendFormDataThunkCreator = (data) => async(dispatch, getState) => {
     console.log(response);
         if(response.data.resultCode === 0) {
             dispatch(infoUserDataThunkCreator(getState().auth.id))
+        } else {
+            const message = response.data.messages.length > 0 ? response.data.messages[0] : "Wrong Email or Password"
+                const action = stopSubmit("profileEdit", {_error: message}) //stopSubmit это спец метод из redux-form который позволяет показать ошибку, настаиваем его и делаем dispatch. В настройке пишем первым пунктом название формы, вторым name Field которое подсветит красным. _error это значит что-то в форме неправильно 
+                dispatch(action);
+                return Promise.reject(response.data.messages[0])
         }
 }
 

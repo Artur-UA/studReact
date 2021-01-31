@@ -6,7 +6,7 @@ import { maxLengthCreator, required } from '../validate/validate'
 import { Input } from '../validate/textArea/FormControl'
 import {Redirect} from 'react-router-dom'
 import '../validate/textArea/FormControl.css'
-import {getAuth} from '../Redux/usersSelector'
+import {getAuth, getCaptcha} from '../Redux/usersSelector'
 import createField from '../validate/field/createField'
 
 const maxLength = maxLengthCreator(20)
@@ -38,6 +38,8 @@ const LoginForm = (props) => {
                     {props.error}
                 </div>} {/* покажет только если будет ошибка */}
 
+                {props.captcha && <img src={props.captcha} alt='captcha'/>}
+                { props.captcha && createField('Captcha', 'url', Input, [required], '', '')}
                 <div>
                     <button>Send</button>
                 </div>
@@ -82,7 +84,8 @@ const LoginConteinerTest = (props) => {
 } */
 const mapStateToProps = (state) => {
     return {
-        auth: getAuth(state)
+        auth: getAuth(state),
+        captcha: getCaptcha(state)
     }
 }
 

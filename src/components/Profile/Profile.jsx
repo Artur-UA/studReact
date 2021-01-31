@@ -29,9 +29,12 @@ const Profile = (state) => {
     }
 
     const sendForm = (form) => {
-        console.log(form);
         state.sendFormDataThunkCreator(form)
-        changeEditMode(false)
+            .then( () => {
+                 changeEditMode(false)
+            }
+            )
+        
     }
 
     const onMainPhotoSelected = (e) => {
