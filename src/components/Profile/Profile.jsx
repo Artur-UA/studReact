@@ -76,11 +76,11 @@ const Profile = (state) => {
                                 ? <ProfileEdit onSubmit={sendForm} initialValues={state.profileData} /> //initialValues это свойство reduxform которая раскинет после отправки данные из state в reduxFrom. Тоесть будет происходить обмен информацией между reduxFrom и redux 
                                 : <ProfileInfo data={state.profileData} changeEditMode={() => changeEditMode(true)} isOwner={state.isOwner}/>} 
 
-                        <ul>
+                        {/* <ul>
                             <li>Facebook : {state.profileData.contacts.facebook}</li>
                             <li>Twitter : {state.profileData.contacts.twitter}</li>
                             <li>GitHub : {state.profileData.contacts.github}</li>
-                        </ul>
+                        </ul> */}
                         {/* <button onClick={() => (state.updateStatus)}>Статус</button> */}
                         </div>
                     <textarea ref={newElement} 

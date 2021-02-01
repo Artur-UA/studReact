@@ -58,14 +58,14 @@ export const loginThunkCreator = (data) => async (dispatch) => {
                 dispatch(authThunkCreator())
             } else {
 
-                if (response.data.resultCode === 10) {
-                    console.log(response);
-                    dispatch(getCaptchaThunkCreator(url))
-                }
+            if (response.data.resultCode === 10) {
+                console.log(response);
+                dispatch(getCaptchaThunkCreator(url))
+            }
 
-                const message = response.data.messages.length > 0 ? response.data.messages : "Wrong Email or Password"
-                const action = stopSubmit("login", {_error: message}) //stopSubmit это спец метод из redux-form который позволяет показать ошибку, настаиваем его и делаем dispatch. В настройке пишем первым пунктом название формы, вторым name Field которое подсветит красным. _error это значит что-то в форме неправильно 
-                dispatch(action);
+            const message = response.data.messages.length > 0 ? response.data.messages : "Wrong Email or Password"
+            const action = stopSubmit("login", {_error: message}) //stopSubmit это спец метод из redux-form который позволяет показать ошибку, настаиваем его и делаем dispatch. В настройке пишем первым пунктом название формы, вторым name Field которое подсветит красным. _error это значит что-то в форме неправильно 
+            dispatch(action);
             }
 }
 
