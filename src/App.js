@@ -12,6 +12,7 @@ import LoginContainer from './components/Login/LoginConteiner'
 import { connect } from 'react-redux';
 import {initialThunkCreator} from './components/Redux/appReducer'
 import Preloader from './components/preloader/preloader'
+import NotPage from './components/validate/404'
 
 const MessagesContainer = React.lazy(() => import('./components/Messages/MessageContainer'));
 
@@ -67,7 +68,8 @@ class App extends React.Component {
                                                                     dispatch={props.dispatch}/>*/}/>
                         <Route path='/users' render={() => <UsersContainer/>}/>
                         <Route path='/login' render={() => <LoginContainer/>}/>
-                        <Route render={()=> <div><h2>Error 404</h2> <img src="https://wpklik.com/wp-content/uploads/2019/03/A-404-Page-Best-Practices-and-Design-Inspiration.jpg" width="100%" height="100%" alt="404"/> </div> }/>
+                        {/* <Route path='/404'render={()=> <div><h2>Error 404</h2> <img src="https://wpklik.com/wp-content/uploads/2019/03/A-404-Page-Best-Practices-and-Design-Inspiration.jpg" width="100%" height="100%" alt="404"/> </div> }/> */}
+                        <Route /* path='/404' */ render={ () => <NotPage/> }/>
                     </Switch>
                 </div>
         </div> 

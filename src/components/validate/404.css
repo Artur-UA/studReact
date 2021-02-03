@@ -1,0 +1,13 @@
+.boxPage {
+    display: block;
+    margin: 0 auto;
+    background-color: #F7F8F9;
+}
+
+.boxText{
+    text-align: center
+}
+
+.box{
+    background-color: #F7F8F9;
+}
