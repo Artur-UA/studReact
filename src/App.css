@@ -3,7 +3,8 @@
   display: grid;
   grid-template-areas:
   "h h"
-  "n c";
+  "n c"
+  "f f";
 
    grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
@@ -34,4 +35,8 @@ background-color: #F7F8F9;
 .login{
   position: absolute;
   right: 0;
+}
+
+footer {
+  grid-area: f;
 }

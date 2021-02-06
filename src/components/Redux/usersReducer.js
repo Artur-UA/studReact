@@ -7,11 +7,7 @@ export const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS'
 
 
 const initialState = {
-    dataFriend: [/* 
-        {id: 1, friend: true, fullName: 'Remi Iren', location: {city: 'Kyiv', country: 'Ukraine'}},
-        {id: 2, friend: false, fullName: 'Sofia Loren', location: {city: 'Dnipro', country: 'Ukraine'}},
-        {id: 3, friend: true, fullName: 'Viktor Popov', location: {city: 'Kharkiv', country: 'Ukraine'}}
-     */],
+    dataFriend: [],
      totalUsers: 0,
      usersInPage: 100,
      numberPage: 1,

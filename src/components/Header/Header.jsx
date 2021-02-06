@@ -1,15 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import '../../App.css'
+import Logout from './Logout'
 
 const Header = (props) => {
-
     return <header className='header'> 
             <div className='login'>
                 {
                     props.id === null 
                         ? <NavLink to={'/login'}>Login</NavLink> 
-                        : <><NavLink to={'/login'}>{props.login}</NavLink> <button onClick={props.logoutThunkCreator}>Logout</button></>
+                        : <><NavLink to={'/login'}>{props.login}</NavLink> {/* <button onClick={props.logoutThunkCreator}>Logout</button> */} <Logout {...props}/></>
                 }
             </div>
             
