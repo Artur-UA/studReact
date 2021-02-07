@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import '../../App.css'
+import './Header.css';
 import Logout from './Logout'
 
 const Header = (props) => {
@@ -9,11 +10,16 @@ const Header = (props) => {
                 {
                     props.id === null 
                         ? <NavLink to={'/login'}>Login</NavLink> 
-                        : <><NavLink to={'/login'}>{props.login}</NavLink> {/* <button onClick={props.logoutThunkCreator}>Logout</button> */} <Logout {...props}/></>
+                        : <>
+                            <span className="nameUser"><b>{props.login}</b></span>
+                            {/*  <NavLink to={'/login'} className={'nameUser'}>{props.login}</NavLink>  */} 
+                            {/* <button onClick={props.logoutThunkCreator}>Logout</button> */} 
+                            <Logout {...props}/>
+                        </>
                 }
             </div>
             
-        <img src='https://www.freelogodesign.org/Content/img/logo-ex-7.png'width="90" height="70" alt='text' />
+        <img src='http://pngimg.com/uploads/2021_year/2021_year_PNG25.png' alt='text' />
         
     </header>
 }

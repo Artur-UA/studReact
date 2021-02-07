@@ -1,4 +1,7 @@
-
+.bodyButton{
+  display: inline-block;
+  margin-top: 0.2rem;
+}
 
 button {
   position: relative;
@@ -56,12 +59,13 @@ button.learn-more .circle .icon.arrow::before {
 button.learn-more .button-text {
   transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   position: absolute;
-  top: 0;
+  top: -0.3rem;
   left: 0;
-  right: 0;
+  right: 1.2rem;
   bottom: 0;
   padding: 0.75rem 0;
   margin: 0 0 0 1.85rem;
+  font-size: 20px;
   color: #282936;
   font-weight: 700;
   line-height: 1.6;
@@ -79,3 +83,22 @@ button:hover .button-text {
   color: #fff;
 }
 
+
+
+.nameUser{
+  background: purple;
+  border-radius: 20px;  
+  display: inline-block;
+  position: relative;
+  margin-right: 15px;
+}
+
+.nameUser b{
+  color: cyan;
+  font-size: 20px;
+  margin: 0 17px;
+  font-size: 18px;
+  line-height: 1.6;
+  text-transform: uppercase;
+  display:block;
+}

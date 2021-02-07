@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 //import axios from 'axios'
 import {authReducerAC, logoutThunkCreator} from '../Redux/authReducer'
 
-import {getId, getLogin, getEmail, getInfo} from '../Redux/usersSelector'
+import {getId, getLogin, getEmail} from '../Redux/usersSelector'
 
 //class HeaderContainer extends React.Component {
 const HeaderContainer = (props) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom'
 import FriendsContainer from './friendsContainer'
-
+import './navbar.css'
 const Navbar = (props) => {
 
 /*     let people = props.friends.map(friend => ) */

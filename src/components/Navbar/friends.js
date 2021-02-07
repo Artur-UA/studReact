@@ -41,9 +41,7 @@ const Friends = (props) => {
 
     return (
         <div>
-           {newName}
-           <br/>
-            {newImg}
+           {newName}{newImg}
             <div>
             <textarea ref={newElement}
                  onChange={onChangeArea}
