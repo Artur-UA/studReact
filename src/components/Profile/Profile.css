@@ -9,3 +9,29 @@
 .errorLogin{
     color: rgb(194, 0, 0);
 }
+
+.grid_page{
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas:
+    "p d"
+    "p d";
+    
+
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 20fr 10fr;
+}
+
+.photo{
+    grid-area: p;
+}
+
+.data_page{
+    grid-area: d;
+}
+
+.grid_page img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}
