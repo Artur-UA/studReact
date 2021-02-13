@@ -56,51 +56,62 @@ const Profile = (state) => {
                 <img src='https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&h=350' alt="альтернативный текст" />
             </div>
                 
-                    <div className='grid_page' >
-                        <div className='photo'>
-                            <img  src={state.profileData.photos.large || 'https://socialvk.ru/wp-content/uploads/avatarka-pustaya-vk_23.jpg'} alt='текст'/>
-                            {/* { state.location.pathname === '/profile' ? <button>Change photo</button> : undefined} */}
-                            { state.isOwner ? <input type="file" onChange={onMainPhotoSelected} /> : undefined}
-                        </div>
+            <div className='grid_page' >
 
-                        <div className='data_page'> 
-                            <span>{state.profileData.userId}-{state.profileData.fullName}</span>
-                            {/* <Status status={state.status} updateStatus={state.updateStatusThunkCreator}/> */}
-                            <StatusHooks status={state.status} updateStatus={state.updateStatusThunkCreator}/>
-                            <br/><b>Status: </b>{state.status}<br/>
-                            {/* {state.profileData.aboutMe} */}
-                            
-                            { isEditMode  
-                                    ? <ProfileEdit onSubmit={sendForm} initialValues={state.profileData} /> //initialValues это свойство reduxform которая раскинет после отправки данные из state в reduxFrom. Тоесть будет происходить обмен информацией между reduxFrom и redux 
-                                    : <ProfileInfo data={state.profileData} changeEditMode={() => changeEditMode(true)} isOwner={state.isOwner}/>} 
+                <div className='photo'>
+                    <img  src={state.profileData.photos.large || 'https://socialvk.ru/wp-content/uploads/avatarka-pustaya-vk_23.jpg'} alt='текст'/>
+                    {/* { state.location.pathname === '/profile' ? <button>Change photo</button> : undefined} */}
+                    { state.isOwner 
+                        ? <input type="file" className='custom-file-input' onChange={onMainPhotoSelected} />
+                        
+                        : undefined
+                    }
 
-                            {/* <ul>
-                                <li>Facebook : {state.profileData.contacts.facebook}</li>
-                                <li>Twitter : {state.profileData.contacts.twitter}</li>
-                                <li>GitHub : {state.profileData.contacts.github}</li>
-                            </ul> */}
-                            {/* <button onClick={() => (state.updateStatus)}>Статус</button> */}
-                            <textarea ref={newElement} 
-                                    /* value={state.message.profilePage.textBeforePost} */
-                                    value={state.messagesValue}
-                                    onChange={textSend}
-                            />
-                            <button onClick={textSend}>Жми</button>
-
-                        </div>
-
-                        <ProfileFormRedux onSubmit={addNewProfileMessage}/>
+                    <span>{state.profileData.userId}-{state.profileData.fullName}</span>
+                    {/* <Status status={state.status} updateStatus={state.updateStatusThunkCreator}/> */}
+                    <br/>
+                    <StatusHooks status={state.status} updateStatus={state.updateStatusThunkCreator}/>
                     
+
                 </div>
 
-                {mess}
-                <div>
-                    <img className='avatar' src="https://chto-takoe-lyubov.net/wp-content/uploads/2019/12/Pyatachok-zagadki.jpg" width="100" height="100" alt="альтернативный текст" />Halo
-                </div>
                 
-                <div>
-                    post 2
+
+                <div className='data_page'> 
+                    
+                    <b>Status: </b>{state.status}<br/>
+                    {/* {state.profileData.aboutMe} */}
+                    { isEditMode  
+                            ? <ProfileEdit onSubmit={sendForm} initialValues={state.profileData} /> //initialValues это свойство reduxform которая раскинет после отправки данные из state в reduxFrom. Тоесть будет происходить обмен информацией между reduxFrom и redux 
+                            : <ProfileInfo data={state.profileData} changeEditMode={() => changeEditMode(true)} isOwner={state.isOwner}/>} 
+
+                    {/* <ul>
+                        <li>Facebook : {state.profileData.contacts.facebook}</li>
+                        <li>Twitter : {state.profileData.contacts.twitter}</li>
+                        <li>GitHub : {state.profileData.contacts.github}</li>
+                    </ul> */}
+                    {/* <button onClick={() => (state.updateStatus)}>Статус</button> */}
+                    <textarea ref={newElement} 
+                            /* value={state.message.profilePage.textBeforePost} */
+                            value={state.messagesValue}
+                            onChange={textSend}
+                    />
+                    <button onClick={textSend}>Жми</button>
+
                 </div>
+
+                <ProfileFormRedux onSubmit={addNewProfileMessage}/>
+            
+            </div>
+
+        {mess}
+        <div>
+            <img className='avatar' src="https://chto-takoe-lyubov.net/wp-content/uploads/2019/12/Pyatachok-zagadki.jpg" width="100" height="100" alt="альтернативный текст" />Halo
+        </div>
+        
+        <div>
+            post 2
+        </div>
             
         </div>
     )
