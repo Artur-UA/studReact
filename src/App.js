@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import {initialThunkCreator} from './components/Redux/appReducer'
 import Preloader from './components/preloader/preloader'
 import NotPage from './components/validate/404'
-import Footer from './components/Footer/Footer'
+import Footers from './components/Footer/Footer'
 
 const MessagesContainer = React.lazy(() => import('./components/Messages/MessageContainer'));
 
@@ -74,7 +74,7 @@ class App extends React.Component {
                     </Switch>
                 </div>
                 <footer>
-                    <Footer/>
+                    <Footers/>
                 </footer>
         </div> 
     )

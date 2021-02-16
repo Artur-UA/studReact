@@ -16,24 +16,27 @@
     grid-template-areas:
     "p d"
     "p d";
-    
 
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 20fr 10fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 5fr 20fr;
+    padding: 25px;
 }
 
 .photo{
     grid-area: p;
+    
 }
 
 .data_page{
     grid-area: d;
+    padding-left: 40px;
 }
 
 .grid_page img {
     display: block;
     margin-left: auto;
-    margin-right: auto 
+    margin-right: auto; 
+    padding-top: 9px;
 }
 
 .photo {
@@ -43,33 +46,39 @@
 .custom-file-input {
     color: transparent;
     display: block;
+    padding: 15px;
+    
+}
 
-  }
-  .custom-file-input::-webkit-file-upload-button {
-    visibility: hidden;
-  }
-  .custom-file-input::before {
-    content: 'Change photo';
-    color: black;
-    display: inline-block;
-    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-    border: 1px solid #999;
-    border-radius: 3px;
-    padding: 5px 8px;
-    outline: none;
-    white-space: nowrap;
-    cursor: pointer;
-    text-shadow: 1px 1px #fff;
-    font-weight: 700;
-    font-size: 10pt;
-    margin-left: 100px;
-  }
-  .custom-file-input:hover::before {
-    border-color: black;
-  }
-  .custom-file-input:active {
-    outline: 0;
-  }
-  .custom-file-input:active::before {
-    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
-  }
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.custom-file-input::before {
+  content: 'Change photo';
+  color: black;
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+  margin-left: 100px;
+}
+
+.custom-file-input:hover::before {
+  border-color: black;
+}
+
+.custom-file-input:active {
+  outline: 0;
+}
+
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+}

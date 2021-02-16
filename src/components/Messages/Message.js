@@ -11,7 +11,7 @@ import createField from '../validate/field/createField'
 const Messages = (props) => {
     /* let item = props.info.messagePage.people;
     let mes = props.info.messagePage.dialogs; */
-    
+    console.log(props);
 
     let dialogsPeople = props.item.map(items => <div key={items.id}><NavLink  to={`/message/${items.id}`}>{items.message}<img className='avatar2' src={items.img}  alt="альтернативный текст"/></NavLink></div>)
 
@@ -83,7 +83,9 @@ const Messages = (props) => {
                 <button onClick={changedRender}>Click</button>
 
               <MessageReduxForm onSubmit={addNewMessage}/>
-
+                
+                
+                
               {/*   {
                     ItemMess.map(ItemMess => {
                         return (
@@ -97,6 +99,10 @@ const Messages = (props) => {
                 <div> П</div> */}
             </div>
             
+            <div className='dialogAva'>
+                <img src="https://www.b17.ru/foto/uploaded/937356d2baf22e2cbb3198c13142f397.jpg" alt="ava"/>
+            </div>
+
         </div>
     )
 }

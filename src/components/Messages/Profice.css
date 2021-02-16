@@ -1,8 +1,8 @@
 .dialogs{
     display: grid;
     grid-template-areas:
-    "n m";
-    grid-template-columns: 2fr 10fr;
+    "n m a";
+    grid-template-columns: 4fr 4fr 4fr;
     padding: 20px;
     background-color:gold ;
     color:fuchsia;
@@ -15,4 +15,15 @@
 
 .dialogsMessage{
     grid-area: m;
+}
+
+.dialogAva{
+    grid-area: a;
+}
+
+.dialogAva img{
+    width: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
