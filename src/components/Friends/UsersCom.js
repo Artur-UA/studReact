@@ -62,44 +62,50 @@ const UsersCom = (props) => {
                         <div>
                             
                                 {i.followed
-                                    ? <button disabled={props.followingInProgress} onClick={() => {
+                                    ? <div>
+                                        <button disabled={props.followingInProgress} onClick={() => {
+                                            
+                                            /* axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${i.id}` , {
+                                                withCredentials: true,
+                                                headers: {
+                                                    'API-KEY': '34443eba-6977-400d-8557-49de76758057'
+                                                }
+                                            }) */
+
+                                            /* props.followingInProgressAC(true);
+                                            API.deleteUsers(i.id);
+                                            props.friendshipAC(i.id);
+                                            props.followingInProgressAC(false); */
+
+
+                                            props.followThunkCreator(API.deleteUsers, i)
+                                        }
                                         
-                                        /* axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${i.id}` , {
-                                            withCredentials: true,
-                                            headers: {
-                                                'API-KEY': '34443eba-6977-400d-8557-49de76758057'
-                                            }
-                                        }) */
+                                        }><a href="##" className="floating-button">Отписаться</a></button>
+                                        <div className='horizontLine'/>
+                                    </div>
 
-                                        /* props.followingInProgressAC(true);
-                                        API.deleteUsers(i.id);
-                                        props.friendshipAC(i.id);
-                                        props.followingInProgressAC(false); */
+                                    : <div>
+                                        <button disabled={props.followingInProgress} onClick={() => {
+                                            
+                                            
+                                            /* axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${i.id}`, {}, {
+                                                withCredentials: true,
+                                                headers: {
+                                                    'API-KEY': '34443eba-6977-400d-8557-49de76758057'
+                                                }
+                                            }) */
+                                            /* props.followingInProgressAC(true);
+                                            API.postUsers(i.id);
+                                            props.friendshipAC(i.id);
+                                            props.followingInProgressAC(false); */
 
-
-                                        props.followThunkCreator(API.deleteUsers, i)
-                                    }
-                                    
-                                    }>Отписаться</button>
-
-                                    : <button disabled={props.followingInProgress} onClick={() => {
+                                            props.followThunkCreator(API.postUsers, i)
+                                        }
                                         
-                                        
-                                        /* axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${i.id}`, {}, {
-                                            withCredentials: true,
-                                            headers: {
-                                                'API-KEY': '34443eba-6977-400d-8557-49de76758057'
-                                            }
-                                        }) */
-                                        /* props.followingInProgressAC(true);
-                                        API.postUsers(i.id);
-                                        props.friendshipAC(i.id);
-                                        props.followingInProgressAC(false); */
-
-                                        props.followThunkCreator(API.postUsers, i)
-                                    }
-                                    
-                                    }>Подписаться</button>
+                                        }><a href="##" className="floating-button">Подписаться</a></button>
+                                        <div className='horizontLine'/>
+                                    </div>
                                 }
                             
                         </div>
