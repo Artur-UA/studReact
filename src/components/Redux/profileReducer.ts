@@ -8,7 +8,21 @@ export const UPDATE_STATUS = 'UPDATE_STATUS'
 export const NEW_PROFILE_REDUX_FORM = 'NEW_PROFILE_REDUX_FORM'
 export const SEND_PHOTO_SUCCESS = 'SEND_PHOTO_SUCCESS'
 
-const initialState = {
+
+type DataType={
+    id: number,
+    name: string,
+    like: number
+}
+
+type initialType = {
+    message: Array<DataType>,
+    textBeforePost: string,
+    profileData: null | number,
+    status: string
+} 
+
+const initialState:initialType = {
     message:[
     {id:1, name:'Хелло', like:3},
     {id:2, name:'Прив', like:22},
@@ -21,7 +35,7 @@ const initialState = {
 }
 
 
-const profileReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action:any) => {
     switch(action.type) {
         case PROFILE_TEXT: {
             /* state.textBeforePost = action.textInfo;
@@ -54,7 +68,8 @@ const profileReducer = (state = initialState, action) => {
         case SEND_PHOTO_SUCCESS: {
             return {
                 ...state , 
-                profileData : {...state.profileData, photos: action.file } 
+                //profileData : {...state.profileData, photos: action.file }
+                profileData : { photos: action.file }
             }
         }
         default:
@@ -62,11 +77,14 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const profileTextActionCreator = (text) => ({type:PROFILE_TEXT, textInfo:text})
-export const setNewProfileAC = (profileData) => ({type: SET_NEW_PROFILE, profileData})
-export const getStatusAC = (info) => ({type: GET_STATUS, status: info})
-export const newProfileFormReduxAC = (profile) => ({type: NEW_PROFILE_REDUX_FORM, profile})
-export const sendPhotoAC = (file) => ({ type: SEND_PHOTO_SUCCESS, file})
+/* type ACType = 
+
+export const profileTextActionCreator: (text:string) => ({type:string, textInfo:string}) = (text) => ({type:PROFILE_TEXT, textInfo:text}) */
+export const profileTextActionCreator = (text:string) => ({type:PROFILE_TEXT, textInfo:text})
+export const setNewProfileAC = (profileData:string) => ({type: SET_NEW_PROFILE, profileData})
+export const getStatusAC = (info:string) => ({type: GET_STATUS, status: info})
+export const newProfileFormReduxAC = (profile:string) => ({type: NEW_PROFILE_REDUX_FORM, profile})
+export const sendPhotoAC = (file:string) => ({ type: SEND_PHOTO_SUCCESS, file})
 
 /* копия до рефакторинга
 export const infoUserDataThunkCreator = (API_Profile, nameId) => {
@@ -78,31 +96,31 @@ export const infoUserDataThunkCreator = (API_Profile, nameId) => {
     }
 } */
 
-export const infoUserDataThunkCreator = (nameId) => async (dispatch) => {
+export const infoUserDataThunkCreator = (nameId:number) => async (dispatch:any) => {
         const response = await API_Profile.getUsersInfo(nameId)
             dispatch(setNewProfileAC(response.data))
 }
 
-export const getStatusThunkCreator = (API_Profile, nameId) => async (dispatch) => {
+export const getStatusThunkCreator = (nameId:number) => async (dispatch:any) => {
         const response = await API_Profile.getUserStatus(nameId)
                 dispatch(getStatusAC(response.data))
 }
 
-export const updateStatusThunkCreator = (status) => async (dispatch) => { 
+export const updateStatusThunkCreator = (status:string) => async (dispatch:any) => { 
         const response = await API_Profile.updateUserStatus(status)
                 if (response.data.resultCode === 0) {
                     dispatch(getStatusAC(status))
                 }
 }
 
-export const sendPhotoThunkCreator = (file) => async (dispatch) => {
+export const sendPhotoThunkCreator = (file:any) => async (dispatch:any) => {
     const response = await API_Profile.sendPhoto(file)
         if(response.data.resultCode === 0) {
             dispatch(sendPhotoAC(response.data.data.photos))
         }
 }
 
-export const sendFormDataThunkCreator = (data) => async(dispatch, getState) => { //тут можно не только dispatch но и еще взять state 
+export const sendFormDataThunkCreator = (data:any) => async(dispatch:any, getState:any) => { //тут можно не только dispatch но и еще взять state 
     const response = await API_Profile.sendPersonForm(data)
     console.log(response);
         if(response.data.resultCode === 0) {

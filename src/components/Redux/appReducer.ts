@@ -2,11 +2,15 @@ import {authThunkCreator} from './authReducer'
 
 export const SET_INITIALIZING = 'SET_INITIALIZING'
 
-const initialState = {
+export type InitialStateType= {
+    initialized: boolean
+}
+
+const initialState:InitialStateType = {
     initialized : false
 }
 
-const appReducer = (state = initialState, action) => {
+const appReducer = (state:InitialStateType = initialState, action: any) => {
     switch (action.type) {
         case SET_INITIALIZING: {
             return {
@@ -19,9 +23,13 @@ const appReducer = (state = initialState, action) => {
     }
 }
 
+type InitialACType = {
+    type: typeof SET_INITIALIZING
+}
+
 export const initialAC = () => ({type: SET_INITIALIZING})
 
-export const initialThunkCreator = () => (dispatch) => {
+export const initialThunkCreator = () => (dispatch: any) => {
         let promise = dispatch(authThunkCreator())
         Promise.all([promise])//когда получим результат от всех диспатчей(они перечислены в массиве), тогда сделаем dispatch
             .then(() => 
