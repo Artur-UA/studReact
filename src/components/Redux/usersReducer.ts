@@ -15,7 +15,9 @@ const initialState = {
      followingInProgress: false
 }
 
-const usersReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+const usersReducer = (state:InitialStateType = initialState, action:any ):InitialStateType => {
     switch(action.type) {
         case FRIEND:
             return {

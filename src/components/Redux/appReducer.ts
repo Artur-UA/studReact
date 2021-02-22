@@ -10,7 +10,7 @@ const initialState:InitialStateType = {
     initialized : false
 }
 
-const appReducer = (state:InitialStateType = initialState, action: any) => {
+const appReducer = (state:InitialStateType = initialState, action: any):InitialStateType => {
     switch (action.type) {
         case SET_INITIALIZING: {
             return {
@@ -27,7 +27,7 @@ type InitialACType = {
     type: typeof SET_INITIALIZING
 }
 
-export const initialAC = () => ({type: SET_INITIALIZING})
+export const initialAC = ():InitialACType => ({type: SET_INITIALIZING})
 
 export const initialThunkCreator = () => (dispatch: any) => {
         let promise = dispatch(authThunkCreator())

@@ -4,7 +4,15 @@ import {stopSubmit} from 'redux-form'
 export const SET_USER_DATA = 'SET_USER_DATA'
 export const GET_CAPTCHA_URL = 'GET_CAPTCHA_URL'
 
-const initialState = {
+export type InitialStateType = {
+    id: null | number,
+    login: null | string,
+    email: string | null,
+    inAuth: boolean,
+    captcha: string | null
+}
+
+const initialState:InitialStateType = {
         id: null,
         login: null,
         email: null,
@@ -12,7 +20,7 @@ const initialState = {
         captcha: null
 }
 
-const authReducer = (state = initialState, action) => {
+const authReducer = (state:InitialStateType = initialState, action: any):InitialStateType => {
     switch(action.type) {
         case SET_USER_DATA:
         case GET_CAPTCHA_URL: //если одна из них придет, то закинет в state 
@@ -25,11 +33,29 @@ const authReducer = (state = initialState, action) => {
     } 
 }
 
+type authReducerPayloadType = {
+    id: number | null,
+    login:string | null,
+    email:string | null,
+    inAuth:boolean,
+    captcha:string | null
+}
 
-export const authReducerAC = (id, login, email, inAuth, captcha) => ({type: SET_USER_DATA, payload: {id, login, email, inAuth, captcha}})
-export const getCaptchaAC = (captcha) => ({ type: GET_CAPTCHA_URL, payload:{captcha}})
+type authReducerType = {
+    type: typeof SET_USER_DATA,
+    payload: authReducerPayloadType
+}
+type GetCaptchaType = {
+    type: typeof GET_CAPTCHA_URL,
+    payload: { captcha: string }
+}
 
-export const authThunkCreator = () =>  async (dispatch) => {
+
+export const authReducerAC = (id: number | null, login:string | null, email:string | null, inAuth:boolean, captcha:string | null):authReducerType => ({type: SET_USER_DATA, payload: {id, login, email, inAuth, captcha}})
+
+export const getCaptchaAC = (captcha:string):GetCaptchaType => ({ type: GET_CAPTCHA_URL, payload:{captcha}})
+
+export const authThunkCreator = () =>  async (dispatch: any) => {
         const response = await API_Auth()
             
         if(response.data.resultCode === 0 ) {
@@ -51,7 +77,7 @@ export const authThunkCreator = () => {
     }
 } */
 
-export const loginThunkCreator = (data) => async (dispatch) => {
+export const loginThunkCreator = (data:any) => async (dispatch:any) => {
         let {email, password, rememberMe, url} = data;
         const response = await API_Login.login(email, password, rememberMe, url)
             if(response.data.resultCode === 0) {
@@ -60,7 +86,8 @@ export const loginThunkCreator = (data) => async (dispatch) => {
 
             if (response.data.resultCode === 10) {
                 console.log(response);
-                dispatch(getCaptchaThunkCreator(url))
+                //dispatch(getCaptchaThunkCreator(url))
+                dispatch(getCaptchaThunkCreator())
             }
 
             const message = response.data.messages.length > 0 ? response.data.messages : "Wrong Email or Password"
@@ -69,7 +96,7 @@ export const loginThunkCreator = (data) => async (dispatch) => {
             }
 }
 
-export const logoutThunkCreator = () => async (dispatch) => {
+export const logoutThunkCreator = () => async (dispatch:any) => {
     const response = await API_Login.logout()
            
         console.log(response);
@@ -78,7 +105,7 @@ export const logoutThunkCreator = () => async (dispatch) => {
         }
 }
 
-export const getCaptchaThunkCreator = () => async (dispatch) => {
+export const getCaptchaThunkCreator = () => async (dispatch:any) => {
     const response = await API_Login.captcha();
     const captchaURL = response.data.url
     dispatch(getCaptchaAC(captchaURL))

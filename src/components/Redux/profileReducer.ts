@@ -9,16 +9,38 @@ export const NEW_PROFILE_REDUX_FORM = 'NEW_PROFILE_REDUX_FORM'
 export const SEND_PHOTO_SUCCESS = 'SEND_PHOTO_SUCCESS'
 
 
-type DataType={
+type DataType = {
     id: number,
     name: string,
     like: number
 }
+type ContacsType = {
+    github: string,
+    vk: string,
+    facebook: string,
+    instagram: string,
+    twitter: string,
+    website: string,
+    youtube: string,
+    mainLink: string
+}
+type PhotosType = {
+    small: string | null,
+    large: string | null
+}
+type ProfileDataType = {
+    userId: number,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    contacts: ContacsType,
+    photos: PhotosType
+}
 
-type initialType = {
+export type initialType = {
     message: Array<DataType>,
     textBeforePost: string,
-    profileData: null | number,
+    profileData: null | ProfileDataType,
     status: string
 } 
 
@@ -35,7 +57,7 @@ const initialState:initialType = {
 }
 
 
-const profileReducer = (state = initialState, action:any) => {
+const profileReducer = (state:initialType = initialState, action:any):initialType => {
     switch(action.type) {
         case PROFILE_TEXT: {
             /* state.textBeforePost = action.textInfo;
@@ -69,7 +91,7 @@ const profileReducer = (state = initialState, action:any) => {
             return {
                 ...state , 
                 //profileData : {...state.profileData, photos: action.file }
-                profileData : { photos: action.file }
+                profileData : { ...state.profileData, photos: action.file }
             }
         }
         default:

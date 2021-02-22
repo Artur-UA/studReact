@@ -2,7 +2,23 @@ export const DIALOG_TEXT = 'DIALOG_TEXT';
 export const DIALOG_TEXT_SEND = 'DIALOG_TEXT_SEND';
 export const DIALOG_TEXT_SEND_REDUX_FORM = 'DIALOG_TEXT_SEND_REDUX_FORM';
 
-const initialState = {
+type PeopleType = {
+    id: number,
+    message: string,
+    img: string
+}
+type DialogsType = {
+    id: number,
+    message: string
+}
+
+export type InitialStateType = {
+    people: Array<PeopleType>,
+    dialogs: Array<DialogsType>,
+    textTest: string
+}
+
+const initialState:InitialStateType = {
         people: [
             {id:1, message:'Привет', img:"https://i.movielib.ru/charpic/1580660/l/98a8/Kot_Matroskin.jpg"},
             {id:2, message:'Приве', img:"https://cs8.pikabu.ru/post_img/2016/01/20/9/1453305573168164067.jpg"},
@@ -20,7 +36,7 @@ const initialState = {
         textTest:'Привет'
     }
 
-const messageReducer = (state = initialState, action) => {
+const messageReducer = (state:InitialStateType = initialState, action: any): InitialStateType => {
     switch(action.type) {
         case DIALOG_TEXT: {
             /* state.textTest = action.infoText; */
@@ -62,8 +78,20 @@ const messageReducer = (state = initialState, action) => {
 
 export default messageReducer;
 
-export const dialogTextActionCreator = (info) => ({type : DIALOG_TEXT, infoText: info})
+type dialogTextType = {
+    type: typeof DIALOG_TEXT,
+    infoText: string
+}
+type dialogTextSendType = {
+    type: typeof DIALOG_TEXT_SEND,
+}
+type dialogTextSendReduxType = {
+    type: typeof DIALOG_TEXT_SEND_REDUX_FORM,
+    message: string
+}
 
-export const dialogTextSendActionCreator = () => ({type: DIALOG_TEXT_SEND})
+export const dialogTextActionCreator = (info: string):dialogTextType => ({type : DIALOG_TEXT, infoText: info})
 
-export const dialogTextSendReduxFromActionCreator = (message) => ({type: DIALOG_TEXT_SEND_REDUX_FORM, message})
+export const dialogTextSendActionCreator = ():dialogTextSendType => ({type: DIALOG_TEXT_SEND})
+
+export const dialogTextSendReduxFromActionCreator = (message: string):dialogTextSendReduxType => ({type: DIALOG_TEXT_SEND_REDUX_FORM, message})
