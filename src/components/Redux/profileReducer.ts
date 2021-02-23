@@ -1,5 +1,6 @@
 import {API_Profile} from '../api/api'
 import {stopSubmit} from 'redux-form'
+import {ProfileDataType, DataType, PhotosType} from '../../types/types'
 
 export const PROFILE_TEXT = 'PROFILE_TEXT';
 export const SET_NEW_PROFILE = 'SET_NEW_PROFILE';
@@ -9,7 +10,7 @@ export const NEW_PROFILE_REDUX_FORM = 'NEW_PROFILE_REDUX_FORM'
 export const SEND_PHOTO_SUCCESS = 'SEND_PHOTO_SUCCESS'
 
 
-type DataType = {
+/* type DataType = { // перекинул все в types.ts 
     id: number,
     name: string,
     like: number
@@ -35,26 +36,28 @@ type ProfileDataType = {
     fullName: string,
     contacts: ContacsType,
     photos: PhotosType
-}
+} */
 
-export type initialType = {
+/* export type initialType = {
     message: Array<DataType>,
     textBeforePost: string,
-    profileData: null | ProfileDataType,
+    profileData: ProfileDataType | null,
     status: string
-} 
+}  */
 
-const initialState:initialType = {
+const initialState = {
     message:[
     {id:1, name:'Хелло', like:3},
     {id:2, name:'Прив', like:22},
     {id:3, name:'Че', like:0},
     {id:4, name:'Хало', like:9}
-    ],
+    ] as Array<DataType>,
     textBeforePost: 'g',
-    profileData: null,
+    profileData: null as ProfileDataType | null,
     status: '----'
 }
+
+export type initialType = typeof initialState;
 
 
 const profileReducer = (state:initialType = initialState, action:any):initialType => {
@@ -88,10 +91,8 @@ const profileReducer = (state:initialType = initialState, action:any):initialTyp
             }
         }
         case SEND_PHOTO_SUCCESS: {
-            return {
-                ...state , 
-                //profileData : {...state.profileData, photos: action.file }
-                profileData : { ...state.profileData, photos: action.file }
+            return {...state, profileData : <ProfileDataType>{...state.profileData, photos: action.file }
+                //profileData : { ...state.profileData, photos: action.file} as ProfileDataType,
             }
         }
         default:
@@ -99,14 +100,33 @@ const profileReducer = (state:initialType = initialState, action:any):initialTyp
     }
 }
 
-/* type ACType = 
 
-export const profileTextActionCreator: (text:string) => ({type:string, textInfo:string}) = (text) => ({type:PROFILE_TEXT, textInfo:text}) */
-export const profileTextActionCreator = (text:string) => ({type:PROFILE_TEXT, textInfo:text})
-export const setNewProfileAC = (profileData:string) => ({type: SET_NEW_PROFILE, profileData})
-export const getStatusAC = (info:string) => ({type: GET_STATUS, status: info})
-export const newProfileFormReduxAC = (profile:string) => ({type: NEW_PROFILE_REDUX_FORM, profile})
-export const sendPhotoAC = (file:string) => ({ type: SEND_PHOTO_SUCCESS, file})
+type ProfileTextACType = {
+    type : typeof PROFILE_TEXT,
+    textInfo: string
+} 
+type SetNewProfileACType = {
+    type: typeof SET_NEW_PROFILE,
+    profileData: string
+}
+type GetStatusACType = {
+    type: typeof GET_STATUS,
+    status: string
+}
+type NewProfileFormReduxACType = {
+    type : typeof NEW_PROFILE_REDUX_FORM,
+    profile : string
+}
+type SendPhotoACType = {
+    type : typeof SEND_PHOTO_SUCCESS,
+    file : PhotosType //потому что это объект фото 
+}
+
+export const profileTextActionCreator = (text:string): ProfileTextACType => ({type:PROFILE_TEXT, textInfo:text})
+export const setNewProfileAC = (profileData:string):SetNewProfileACType => ({type: SET_NEW_PROFILE, profileData})
+export const getStatusAC = (info:string):GetStatusACType => ({type: GET_STATUS, status: info})
+export const newProfileFormReduxAC = (profile:string):NewProfileFormReduxACType => ({type: NEW_PROFILE_REDUX_FORM, profile})
+export const sendPhotoAC = (file:PhotosType):SendPhotoACType => ({ type: SEND_PHOTO_SUCCESS, file})
 
 /* копия до рефакторинга
 export const infoUserDataThunkCreator = (API_Profile, nameId) => {

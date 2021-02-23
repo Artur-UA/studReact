@@ -1,3 +1,4 @@
+import {UserType} from '../../types/types'
 export const FRIEND = "FRIEND";
 export const ADD_FRIEND = 'ADD_FRIEND';
 export const NEW_LIST = 'NEW_LIST';
@@ -6,16 +7,18 @@ export const TOOGLE_IS_PRELOADER = 'TOOGLE_IS_PRELOADER';
 export const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS'
 
 
+
+
 const initialState = {
-    dataFriend: [],
-     totalUsers: 0,
-     usersInPage: 100,
-     numberPage: 1,
-     isPreloader: true,
-     followingInProgress: false
+    dataFriend: [] as Array<UserType>,
+    totalUsers: 0,
+    usersInPage: 100,
+    numberPage: 1,
+    isPreloader: true,
+    followingInProgress: false
 }
 
-export type InitialStateType = typeof initialState;
+type InitialStateType = typeof initialState;
 
 const usersReducer = (state:InitialStateType = initialState, action:any ):InitialStateType => {
     switch(action.type) {
@@ -45,8 +48,8 @@ const usersReducer = (state:InitialStateType = initialState, action:any ):Initia
 }
 
 
-export const friendshipAC = (id) => ({ type: FRIEND, id })
-export const addFriendAC = (data) => ({ type: ADD_FRIEND, data })
+export const friendshipAC = (id:number) => ({ type: FRIEND, id })
+export const addFriendAC = (data:any) => ({ type: ADD_FRIEND, data })
 export const newListAC = (response, pop) => ({ type: NEW_LIST, response, pop })
 export const allPageAC = (page) => ({ type: ALL_PAGE, page })
 export const toogleIsPreloaderAC = (boolean) => ({ type: TOOGLE_IS_PRELOADER, boolean })
