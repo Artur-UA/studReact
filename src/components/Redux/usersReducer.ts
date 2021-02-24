@@ -7,8 +7,6 @@ export const TOOGLE_IS_PRELOADER = 'TOOGLE_IS_PRELOADER';
 export const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS'
 
 
-
-
 const initialState = {
     dataFriend: [] as Array<UserType>,
     totalUsers: 0,
@@ -47,18 +45,42 @@ const usersReducer = (state:InitialStateType = initialState, action:any ):Initia
     }
 }
 
+type friendshipACType = {
+    type: typeof FRIEND,
+    id: number
+}
+export const friendshipAC = (id:number):friendshipACType => ({ type: FRIEND, id })
+type addFriendACType = {
+    type: typeof ADD_FRIEND,
+    data: number
+} 
+export const addFriendAC = (data:number):addFriendACType => ({ type: ADD_FRIEND, data })
+type newListACType = {
+    type: typeof NEW_LIST,
+    response: any,
+    pop: any
+}
+export const newListAC = (response: any, pop: any):newListACType => ({ type: NEW_LIST, response, pop })
+type allPageACType = {
+    type: typeof ALL_PAGE,
+    page: number
+}
+export const allPageAC = (page: number):allPageACType => ({ type: ALL_PAGE, page })
+type toogleIsPreloaderACType = {
+    type: typeof TOOGLE_IS_PRELOADER,
+    boolean: boolean
+}
+export const toogleIsPreloaderAC = (boolean: boolean):toogleIsPreloaderACType => ({ type: TOOGLE_IS_PRELOADER, boolean })
+type followingInProgressACType = {
+    type: typeof FOLLOWING_IN_PROGRESS,
+    boolean: boolean
+}
+export const followingInProgressAC = (boolean: boolean):followingInProgressACType => ({ type: FOLLOWING_IN_PROGRESS, boolean })
 
-export const friendshipAC = (id:number) => ({ type: FRIEND, id })
-export const addFriendAC = (data:any) => ({ type: ADD_FRIEND, data })
-export const newListAC = (response, pop) => ({ type: NEW_LIST, response, pop })
-export const allPageAC = (page) => ({ type: ALL_PAGE, page })
-export const toogleIsPreloaderAC = (boolean) => ({ type: TOOGLE_IS_PRELOADER, boolean })
-export const followingInProgressAC = (boolean) => ({ type: FOLLOWING_IN_PROGRESS, boolean })
 
 
-
-export const followThunkCreator = (API, info) => {
-    return (dispatch) => {
+export const followThunkCreator = (API:any, info:any) => {
+    return (dispatch:any) => {
         dispatch(followingInProgressAC(true));
         API(info.id);
         dispatch(friendshipAC(info.id));
@@ -89,7 +111,7 @@ export const getAllUsersThunkCreator = (API, numberPage, usersInPage) => {
     }
 } */
 
-export const getAllUsersThunkCreator = (API, numberPage, usersInPage) => async (dispatch) => {
+export const getAllUsersThunkCreator = (API:any, numberPage:number, usersInPage:any) => async (dispatch:any) => {
         dispatch(toogleIsPreloaderAC(true)) 
         const data = await API.getUsers(numberPage, usersInPage)
         dispatch(addFriendAC(data.items))
@@ -97,7 +119,7 @@ export const getAllUsersThunkCreator = (API, numberPage, usersInPage) => async (
         dispatch(toogleIsPreloaderAC(false))
 } 
 
-export const getNewUsersThunkCreator = (API, pop, usersInPage) => async (dispatch) => {
+export const getNewUsersThunkCreator = (API:any, pop:any, usersInPage:any) => async (dispatch:any) => {
         dispatch(toogleIsPreloaderAC(true)) 
         const response = await API.getUsers(pop, usersInPage)
             dispatch(newListAC(response, pop));
