@@ -30,10 +30,10 @@
   },
   "eslintConfig": {
     "extends": [
-       "react-app",
-       "react-app/jest"
+      "react-app",
+      "react-app/jest"
     ]
- }, //https://stackoverflow.com/questions/64657876/eslint-error-causing-create-react-app-failed-to-compile
+  },
   "browserslist": {
     "production": [
       ">0.2%",
